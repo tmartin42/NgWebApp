@@ -1,0 +1,156 @@
+
+
+.Heiti_TC {
+
+}
+
+h1 {
+  font-size: 50px;
+  position: relative;
+  display: block;
+  color: white;
+  font-weight: 100;
+  padding: 90px;
+}
+
+h1 span {
+  font-weight: bold;
+}
+
+.card {
+  padding: 0px;
+  background: #fdfdfd;
+  width: 600px;
+  position: relative;
+  display: block;
+  margin: 0px auto;
+}
+
+.tab-button {
+  font-size: 22px;
+  padding: 18px 20px 14px;
+  width: 50%;
+  position: relative;
+  display: inline-block;
+  color: #112329;
+  cursor: pointer;
+
+}
+
+.doubletab {
+  overflow: hidden;
+}
+
+.tab-slider-cont{
+  position: relative;
+  width: 100%;
+  height: 2px;
+}
+
+.tab-slider-cont div {
+  width: 50%;
+  height: 2px;
+  left: 0%;
+  position: relative;
+  background-color: #ff3556;
+  transition: left 0.5s ease;
+}
+
+.tab-slider-cont.right div {
+  left: 50%;
+}
+
+.doubletab-child {
+  height: 311px;
+  overflow: hidden;
+  width: 200%;
+  position: relative;
+  left: 0%;
+  transition: left 0.5s ease;
+}
+
+.doubletab-child.right {
+  left: -100%;
+}
+
+.tab {
+  padding: 35px 40px;
+  width: 50%;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+
+.tab1 {
+
+}
+
+label {
+  position: relative;
+  display: block;
+}
+
+input {
+  height: 45px;
+  width: 420px;
+  margin: 5px 10px;
+  font-size: 16px;
+  outline: none;
+  position: relative;
+  padding: 0px 10px;
+}
+
+button {
+  width: 220px;
+  height: 50px;
+  border-radius: 0px;
+  -webkit-appearance: none;
+  border: none;
+  background-color: #ff3556;
+  font-size: 20px;
+  margin-top: 14px;
+  outline: none;
+  line-height: 52px;
+  color: white;
+  cursor: pointer;
+}
+
+.tab1 button {
+  margin-top: 36px;
+}
+
+.tab1 input {
+  margin: 10px 10px;
+}
+
+.tab1 {
+  padding: 52px 40px 35px;
+}
+
+.loginFGD {
+  padding: 0px;
+  position: relative;
+  width: 600px;
+  display: block;
+  margin: 40px auto 0px;
+}
+
+h2 {
+  width: 100%;
+  font-size: 24px;
+  color: white;
+}
+
+.FGDlink {
+  position: relative;
+  display: inline-block;
+  font-size: 50px;
+  color: white;
+  border: 2px solid white;
+  width: 80px;
+  height: 80px;
+  line-height: 83px;
+  border-radius: 80px;
+  margin: 24px 10px;
+  cursor: pointer;
+}

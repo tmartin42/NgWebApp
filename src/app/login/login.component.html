@@ -1,0 +1,52 @@
+
+
+<h1><span>Music</span>Room</h1>
+
+<p>
+ admin@boilerplate-app.com
+  admin1234
+</p>
+
+  <div class="card">
+    <div class="doubletab">
+      <div class="but1 tab-button" (click)="doubletab(false)">Login</div>
+      <div class="but2 tab-button" (click)="doubletab(true)" >Signup</div>
+      <div class="tab-slider-cont" [ngClass]="{'right': tab}"><div></div></div>
+      <div class="doubletab-child" [ngClass]="{'right': tab}">
+        <div class="tab1 tab">
+          <label> Mail:
+            <input [(ngModel)]="emailLogin" placeholder="Mail">
+          </label>
+          <label>Password:
+            <input type="password" [(ngModel)]="passwordLogin" placeholder="Password">
+          </label>
+
+          <button (click)="login(emailLogin, passwordLogin)">
+            Login
+          </button>
+        </div>
+        <div class="tab2 tab">
+          <label>Mail:
+            <input [(ngModel)]="emailRegister" placeholder="Mail">
+          </label>
+          <label>Password:
+            <input type="password" [(ngModel)]="passwordRegister" placeholder="Password">
+          </label>
+          <label>Confirm password:
+            <input type="password" [(ngModel)]="passwordConfirmRegister" placeholder="Confirm Password">
+          </label>
+
+          <button (click)="register(emailRegister, passwordRegister, passwordConfirmRegister)">
+            Register
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loginFGD">
+    <h2>Or register with:</h2>
+    <a class="FGDlink">F</a>
+    <a class="FGDlink">G</a>
+  </div>
+

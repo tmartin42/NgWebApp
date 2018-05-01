@@ -1,0 +1,568 @@
+<!--p>
+  This is protected area!
+</p>
+
+<h4>Users:</h4>
+<ul>
+  <li *ngFor="let user of users$ | async">
+    {{ user.name }}
+  </li>
+</ul>
+
+<h4>Data:</h4>
+<ul>
+  <li *ngFor="let user of data$ | async">
+    {{ user.name }}
+  </li>
+</ul>
+
+<button (click)="loadData()">
+  LoadData
+</button>
+
+<button (click)="logout()">
+  Logout
+</button>
+-->
+
+<div class="MultipleTabs">
+  <div class="tab1 tabbutton" [ngClass]="{'active': tab == 1}" (click)="selectTab(1)">Discover</div>
+  <div class="tab2 tabbutton" [ngClass]="{'active': tab == 2}" (click)="selectTab(2)">Events</div>
+  <div class="tab3 tabbutton" [ngClass]="{'active': tab == 3}" (click)="selectTab(3)">Playlists</div>
+  <div class="tab4 tabbutton" [ngClass]="{'active': tab == 4}" (click)="selectTab(4)">People</div>
+</div>
+<div class="tabs">
+  <div class="tab" [ngClass]="{'active': tab == 1}">
+    <div class="someevents line" >
+      <h2>Events near you</h2>
+      <div class="someEventsList smallList">
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square more" (click)="selectTab(2)">
+          <div class="img">
+            <div class="subtitle">MORE EVENTS</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="someplaylists line">
+      <h2>Playlists you might like</h2>
+      <div class="somePlaylistsList smallList">
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square more" (click)="selectTab(3)">
+          <div class="img">
+            <div class="subtitle">MORE PLAYLISTS</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="somepeople line">
+      <h2>People you should know</h2>
+      <div class="somePeopleList smallList">
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example peoplet</div>
+          </div>
+        </a>
+        <a class="people square more" (click)="selectTab(4)">
+          <div class="img">
+            <div class="subtitle">MORE PEOPLE</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="tab" [ngClass]="{'active': tab == 2}">
+    <div class="someevents line" >
+      <h2>Events near you</h2>
+      <div class="someEventsList smallList">
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example event</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="tab" [ngClass]="{'active': tab == 3}">
+    <div class="someplaylists line">
+      <h2>Playlists you might like</h2>
+      <div class="somePlaylistsList smallList">
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+        <a class="event square">
+          <div class="img">
+            <div class="subtitle">example playlist</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="tab" [ngClass]="{'active': tab == 4}">
+    <div class="somepeople line">
+      <h2>People you should know</h2>
+      <div class="somePeopleList smallList">
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example peoplet</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example peoplet</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example peoplet</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example peoplet</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example peoplet</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example people</div>
+          </div>
+        </a>
+        <a class="people square">
+          <div class="img">
+            <div class="subtitle">example peoplet</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

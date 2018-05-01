@@ -1,0 +1,18 @@
+<div class="playlistInfos">
+  <div class="playlistImg">
+  </div>
+  <h2>Example Playlist</h2>
+  <p>3 song - 5 contributors</p>
+  <p>45 minutes</p>
+</div>
+
+<div class="MultipleTabs">
+  <div class="tab1 tabbutton" [ngClass]="{'active': tab == 1}" (click)="selectTab(1)">Discover</div>
+  <div class="tab2 tabbutton" [ngClass]="{'active': tab == 2}" (click)="selectTab(2)">Events</div>
+</div>
+<div class="tabs">
+  <div class="tab" [ngClass]="{'active': tab == 1}">
+  </div>
+  <div class="tab" [ngClass]="{'active': tab == 2}">
+  </div>
+</div>
