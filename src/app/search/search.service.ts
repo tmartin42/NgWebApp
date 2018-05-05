@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class DataService {
+export class SearchService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<any> {
-    return this.http.get(`http://localhost:3000/playlists` );
+  getUsers() {
+    return this.http.get('http://localhost:3000/users');
   }
 
   getData() {

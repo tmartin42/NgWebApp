@@ -19,6 +19,16 @@ const routes: Routes = [
     loadChildren: './playlist/playlist.module#PlaylistModule'
   },
   {
+    path: 'profile',
+    canActivate: [ ProtectedGuard ],
+    loadChildren: './users/profile/profile.module#ProfileModule'
+  },
+  {
+    path: 'search',
+    canActivate: [ ProtectedGuard ],
+    loadChildren: './search/search.module#SearchModule'
+  },
+  {
     path: '',
     redirectTo: 'discover',
     pathMatch: 'full'

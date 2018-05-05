@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DataService } from '../data.service';
+import { PlaylistService } from './playlist.service';
+import {  UsersService } from '../users/users.service';
 
 import { PlaylistRoutingModule } from './playlist-routing.module';
 import { PlaylistComponent } from './playlist.component';
@@ -12,7 +13,8 @@ import { PlaylistComponent } from './playlist.component';
     PlaylistRoutingModule
   ],
   providers: [
-    DataService
+    PlaylistService,
+    UsersService
   ],
   declarations: [PlaylistComponent]
 })

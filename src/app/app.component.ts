@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
     this.getAuth();
   }
 
-
   getAuth(): void {
     this.authService.isAuthorized().subscribe(token => this.isAuth = token);
   }

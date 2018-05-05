@@ -127,7 +127,7 @@
   <div class="tab" [ngClass]="{'active': tab == 2}">
     <div class="someevents line" >
       <h2>Events near you</h2>
-      <div class="someEventsList smallList">
+      <div class="someEventsList list">
         <a class="event square">
           <div class="img">
             <div class="subtitle">example event</div>
@@ -314,8 +314,16 @@
   <div class="tab" [ngClass]="{'active': tab == 3}">
     <div class="someplaylists line">
       <h2>Playlists you might like</h2>
-      <div class="somePlaylistsList smallList">
-        <a class="event square">
+      <div class="somePlaylistsList list">
+          <a class="event square" *ngFor="let user of users$ | async" href="/playlist/{{user.id}}">
+            <div class="img">
+              <div class="subtitle">
+            {{ user.title }}
+              </div>
+            </div>
+          </a>
+
+        <!--a class="event square">
           <div class="img">
             <div class="subtitle">example playlist</div>
           </div>
@@ -434,14 +442,14 @@
           <div class="img">
             <div class="subtitle">example playlist</div>
           </div>
-        </a>
+        </a-->
       </div>
     </div>
   </div>
   <div class="tab" [ngClass]="{'active': tab == 4}">
     <div class="somepeople line">
       <h2>People you should know</h2>
-      <div class="somePeopleList smallList">
+      <div class="somePeopleList list">
         <a class="people square">
           <div class="img">
             <div class="subtitle">example people</div>

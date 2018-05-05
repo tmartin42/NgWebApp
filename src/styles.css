@@ -54,8 +54,11 @@ body, html {
 }
 
 .wrapper {
-  padding: 90px 0px 0px;
   min-height: 100%;
   position: absolute;
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }

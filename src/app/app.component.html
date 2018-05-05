@@ -1,14 +1,15 @@
 <div class="leftTab" *ngIf="isAuth">
   <div class="leftSep"></div>
-  <a class="leftLink">Search</a>
+  <a class="leftLink" href="/search">Search</a>
   <div class="leftSep"></div>
   <a class="leftLink">Your music</a>
-  <a class="leftLink">Discover</a>
+  <a class="leftLink" href="/discover">Discover</a>
   <div class="leftSep"></div>
 
   <div class="bottom">
+    <a class="yourname" (click)="logout()"><div class="profile">Logout</div></a>
   <div class="leftSep"></div>
-  <a class="yourname" (click)="logout()"><div class="profile">Kultainen</div></a>
+   <a class="yourname" href="/profile"><div class="profile">Kultainen</div></a>
   </div>
 </div>
 <div class="wrapper" [ngClass]="{'smaller': isAuth}">

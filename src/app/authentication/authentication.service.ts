@@ -90,11 +90,16 @@ export class AuthenticationService implements AuthService {
    */
 
 
-  public login(email, password): Observable<any> {
-    return this.http.post(`http://localhost:3000/login`, {email: email, password: password} )
-      .do((tokens: AccessData) => this.saveAccessData(tokens));
+  public login(username, password): Observable<any> {
+    return this.http.post(`http://localhost:3000/user/login`, {username: username, password: password}, {responseType: 'text'} )
+      .do((tokens: string) => this.saveAccessData(tokens));
   }
 
+  public signup(username, email, password): Observable<any> {
+    console.log("signup");
+    return this.http.post(`http://localhost:3000/user/signup`, {username: username, mail: email, password: password}, { headers: {'Content-Type': 'application/x-www-form-urlencoded'}} )
+      .do((tokens: string) => this.saveAccessData(tokens));
+  }
   /**
    * Logout
    */
@@ -109,10 +114,15 @@ export class AuthenticationService implements AuthService {
    * @private
    * @param {AccessData} data
    */
-  private saveAccessData({ accessToken, refreshToken }: AccessData) {
+  private saveAccessData(token: string) {
+    console.log("tokens: ", token, token);
     this.tokenStorage
-      .setAccessToken(accessToken)
-      .setRefreshToken(refreshToken);
+      .setAccessToken(token)
+      .setRefreshToken(token);
+
   }
 
+  public getHeaders(token: string) {
+    return { Authorize: token};
+  }
 }

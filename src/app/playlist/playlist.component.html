@@ -1,18 +1,105 @@
-<div class="playlistInfos">
-  <div class="playlistImg">
+<div class="playlistInfos" *ngIf="playlist">
+  <div class="playlistInfosWrapper">
+    <h1>{{ playlist.title }}</h1>
+    <p>{{ playlist.tracks.length }} song - {{ playlist.contributors.length }} contributors</p>
+    <a *ngIf="owner" href="/user/{{owner.id}}">{{owner.username}}</a>
   </div>
-  <h2>Example Playlist</h2>
-  <p>3 song - 5 contributors</p>
-  <p>45 minutes</p>
+  <div class="img" *ngIf="owner" >
+    <img *ngIf="owner.pic" src="{{owner.pic}}"/>
+  </div>
 </div>
 
 <div class="MultipleTabs">
-  <div class="tab1 tabbutton" [ngClass]="{'active': tab == 1}" (click)="selectTab(1)">Discover</div>
-  <div class="tab2 tabbutton" [ngClass]="{'active': tab == 2}" (click)="selectTab(2)">Events</div>
+  <div class="tab1 tabbutton" [ngClass]="{'active': tab == 1}" (click)="selectTab(1)">Songs</div>
+  <div class="tab2 tabbutton" [ngClass]="{'active': tab == 2}" (click)="selectTab(2)">Contributors</div>
+  <div class="tab1 tabbutton right" [ngClass]="{'active': tab == 3}" (click)="selectTab(3)">Add songs</div>
+  <div class="tab2 tabbutton right" [ngClass]="{'active': tab == 4}" (click)="selectTab(4)">Add people</div>
 </div>
 <div class="tabs">
   <div class="tab" [ngClass]="{'active': tab == 1}">
+
+    <!--div class="songList smallList">
+      <div class="song">
+        <div class="nbr">1</div>
+        <div class="rest">
+          <div class="songTitle">Fury of the stromae</div>
+          <div class="time">2:42</div>
+          <div class="songInfo">Dragon force - live of Japan</div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="nbr">2</div>
+        <div class="rest">
+        <div class="songTitle">Throught the fire and flame of lol</div>
+        <div class="time">2:42</div>
+        <div class="songInfo">Dragon force - live of Japan</div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="nbr">3</div>
+        <div class="rest">
+        <div class="songTitle">4 seasons of dragon</div>
+        <div class="time">2:42</div>
+        <div class="songInfo">Dragon force - live of Japan</div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="nbr">4</div>
+        <div class="rest">
+        <div class="songTitle">more humans than lol players</div>
+        <div class="time">2:42</div>
+        <div class="songInfo">Dragon force - live of Japan</div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="nbr">5</div>
+        <div class="rest">
+        <div class="songTitle">Lets rip some powerless noobs</div>
+        <div class="time">2:42</div>
+        <div class="songInfo">Dragon force - live of Japan</div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="nbr">6</div>
+        <div class="rest">
+        <div class="songTitle">Before i was young, i was younger</div>
+        <div class="time">2:42</div>
+        <div class="songInfo">Dragon force - live of Japan</div>
+        </div>
+      </div>
+    </div-->
   </div>
   <div class="tab" [ngClass]="{'active': tab == 2}">
+    <div class="peopleList smallList">
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example event</div>
+        </div>
+      </a>
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example event</div>
+        </div>
+      </a>
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example event</div>
+        </div>
+      </a>
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example event</div>
+        </div>
+      </a>
+      <a class="event square more" (click)="selectTab(2)">
+        <div class="img">
+          <div class="subtitle">MORE EVENTS</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="tab" [ngClass]="{'active': tab == 3}">
+  </div>
+  <div class="tab" [ngClass]="{'active': tab == 4}">
   </div>
 </div>

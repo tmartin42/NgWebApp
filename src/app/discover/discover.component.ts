@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -10,7 +10,9 @@ import { DataService } from '../data.service';
   styleUrls: ['./discover.component.css', '../tabsystem.css'],
   templateUrl: './discover.component.html'
 })
-export class DiscoverComponent {
+
+
+export class DiscoverComponent implements OnInit {
 
   public users$: Observable<any>;
   public data$: Observable<any>;
@@ -21,17 +23,23 @@ export class DiscoverComponent {
     private router: Router,
     private dataService: DataService,
     private authService: AuthenticationService
-  ) { }
+  ) {
+    console.log(this.users$);
+  }
 
   public loadData() {
     this.users$ = this.dataService.getUsers();
-    this.data$ = this.dataService.getData();
   }
 
 
   public selectTab(nbr) {
     this.tab = -1;
     setTimeout(() => {this.tab = nbr; }, 200);
+  }
+
+  ngOnInit() {
+    console.log('lol');
+    this.loadData();
   }
 
 }

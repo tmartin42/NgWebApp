@@ -18,6 +18,11 @@ h2 {
   position: relative;
   display: inline-block;
 }
+.list {
+  max-width: 1500px;
+  position: relative;
+  display: inline-block;
+}
 
 .square {
   position: relative;

@@ -14,18 +14,21 @@
       <div class="tab-slider-cont" [ngClass]="{'right': tab}"><div></div></div>
       <div class="doubletab-child" [ngClass]="{'right': tab}">
         <div class="tab1 tab">
-          <label> Mail:
-            <input [(ngModel)]="emailLogin" placeholder="Mail">
+          <label> Username:
+            <input [(ngModel)]="usernameLogin" placeholder="Username">
           </label>
           <label>Password:
             <input type="password" [(ngModel)]="passwordLogin" placeholder="Password">
           </label>
 
-          <button (click)="login(emailLogin, passwordLogin)">
+          <button (click)="login(usernameLogin, passwordLogin)">
             Login
           </button>
         </div>
         <div class="tab2 tab">
+          <label>Username:
+            <input [(ngModel)]="usernameRegister" placeholder="Username">
+          </label>
           <label>Mail:
             <input [(ngModel)]="emailRegister" placeholder="Mail">
           </label>
@@ -36,7 +39,7 @@
             <input type="password" [(ngModel)]="passwordConfirmRegister" placeholder="Confirm Password">
           </label>
 
-          <button (click)="register(emailRegister, passwordRegister, passwordConfirmRegister)">
+          <button (click)="register(usernameRegister, emailRegister, passwordRegister, passwordConfirmRegister)">
             Register
           </button>
         </div>

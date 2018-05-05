@@ -9,8 +9,9 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 export class LoginComponent {
 
-  emailLogin = '';
+  usernameLogin = '';
   passwordLogin = '';
+  usernameRegister = '';
   emailRegister = '';
   passwordRegister = '';
   passwordConfirmRegister = '';
@@ -22,12 +23,18 @@ export class LoginComponent {
   ) {
   }
 
-  public login(email, password) {
+  public login(username, password) {
     this.authService
-      .login(email, password)
+      .login(username, password)
       .subscribe(() => this.router.navigateByUrl('/'));
   }
-  public register(email, password, passwordConfirm) {
+  public register(username, email, password, passwordConfirm) {
+    if (password == passwordConfirm)
+    {
+      this.authService
+        .signup(username, email, password)
+        .subscribe(() => this.router.navigateByUrl('/'));
+    }
     console.log('register');
   }
 

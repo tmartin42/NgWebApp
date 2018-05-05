@@ -1,0 +1,104 @@
+<div class="searchInput">
+  <input [(ngModel)]="search" placeholder="Search">
+  <div class="dropdown" [ngClass]="{'closed': close == true}">
+    <div class="chosen">{{drop}}</div>
+    <div class="rollout">
+      <div [ngClass]="{'hidden': dropbelow == 'All'}" (click)="setdrop('All')">All</div>
+      <div [ngClass]="{'hidden': dropbelow == 'Events'}" (click)="setdrop('Events')">Events</div>
+      <div [ngClass]="{'hidden': dropbelow == 'Playlists'}" (click)="setdrop('Playlists')">Playlists</div>
+      <div [ngClass]="{'hidden': dropbelow == 'People'}" (click)="setdrop('People')">People</div>
+    </div>
+  </div>
+</div>
+<div class="searchResult">
+  <div class="someevents line" >
+    <h2>Events</h2>
+    <div class="someEventsList smallList">
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example event</div>
+        </div>
+      </a>
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example event</div>
+        </div>
+      </a>
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example event</div>
+        </div>
+      </a>
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example event</div>
+        </div>
+      </a>
+      <a class="event square more" (click)="selectTab(2)">
+        <div class="img">
+          <div class="subtitle">MORE EVENTS</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="someplaylists line">
+    <h2>Playlists</h2>
+    <div class="somePlaylistsList smallList">
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example playlist</div>
+        </div>
+      </a>
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example playlist</div>
+        </div>
+      </a>
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example playlist</div>
+        </div>
+      </a>
+      <a class="event square">
+        <div class="img">
+          <div class="subtitle">example playlist</div>
+        </div>
+      </a>
+      <a class="event square more" (click)="selectTab(3)">
+        <div class="img">
+          <div class="subtitle">MORE PLAYLISTS</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="somepeople line">
+    <h2>People</h2>
+    <div class="somePeopleList smallList">
+      <a class="people square">
+        <div class="img">
+          <div class="subtitle">example people</div>
+        </div>
+      </a>
+      <a class="people square">
+        <div class="img">
+          <div class="subtitle">example people</div>
+        </div>
+      </a>
+      <a class="people square">
+        <div class="img">
+          <div class="subtitle">example people</div>
+        </div>
+      </a>
+      <a class="people square">
+        <div class="img">
+          <div class="subtitle">example peoplet</div>
+        </div>
+      </a>
+      <a class="people square more" (click)="selectTab(4)">
+        <div class="img">
+          <div class="subtitle">MORE PEOPLE</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
