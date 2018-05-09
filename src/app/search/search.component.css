@@ -38,7 +38,7 @@ h2 {
 }
 
 .smallList {
-  height: 240px;
+  min-height: 240px;
   max-width: 1500px;
   position: relative;
   display: inline-block;
@@ -144,4 +144,59 @@ h2 {
   right: 19px;
   width: 8px;
   top: 19px;
+}
+
+
+.track {
+  padding: 10px;
+  font-size: 16px;
+  height: 70px;
+  text-align: left;
+  color: white;
+  display: inline-block;
+  width: 100%;
+}
+
+.track .nbr {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  color: #b3b3b3;
+  border: 1px solid #b3b3b3;
+  margin: 5px;
+  border-radius: 50px;
+}
+
+.rest {
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 60px);
+}
+
+.songTitle {
+  width: calc(100% - 40px);
+  position: relative;
+  display: inline-block;
+  line-height: 30px;
+}
+
+.time {
+  position: relative;
+  display: inline-block;
+  line-height: 30px;
+  color: #b3b3b3;
+  font-size: 14px;
+}
+
+.songInfo {
+  position: relative;
+  display: inline-block;
+  line-height: 20px;
+  font-size: 10px;
+  color: #b3b3b3;
 }

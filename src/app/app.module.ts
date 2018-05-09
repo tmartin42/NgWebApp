@@ -4,7 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { AppRoutingModule } from './app-routing.module';
+import { JsonpModule, Jsonp } from '@angular/http';
 import { AppComponent } from './app.component';
+import { SanitizeHtml } from './pipe';
+import { DataService } from "./data.service";
 
 @NgModule({
   imports: [
@@ -13,10 +16,14 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     AuthenticationModule,
     AppRoutingModule,
-
+    JsonpModule
+  ],
+  providers: [
+    DataService
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    SanitizeHtml
   ],
   bootstrap: [
     AppComponent

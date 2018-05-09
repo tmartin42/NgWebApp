@@ -1,9 +1,11 @@
 <div class="searchInput">
-  <input [(ngModel)]="search" placeholder="Search">
+  <input [(ngModel)]="searchword" placeholder="Search" (change)="search()">
   <div class="dropdown" [ngClass]="{'closed': close == true}">
     <div class="chosen">{{drop}}</div>
     <div class="rollout">
-      <div [ngClass]="{'hidden': dropbelow == 'All'}" (click)="setdrop('All')">All</div>
+      <div [ngClass]="{'hidden': dropbelow == 'Tracks'}" (click)="setdrop('Tracks')">Tracks</div>
+      <div [ngClass]="{'hidden': dropbelow == 'Artists'}" (click)="setdrop('Artists')">Artists</div>
+      <div [ngClass]="{'hidden': dropbelow == 'Albums'}" (click)="setdrop('Albums')">Albums</div>
       <div [ngClass]="{'hidden': dropbelow == 'Events'}" (click)="setdrop('Events')">Events</div>
       <div [ngClass]="{'hidden': dropbelow == 'Playlists'}" (click)="setdrop('Playlists')">Playlists</div>
       <div [ngClass]="{'hidden': dropbelow == 'People'}" (click)="setdrop('People')">People</div>
@@ -11,7 +13,7 @@
   </div>
 </div>
 <div class="searchResult">
-  <div class="someevents line" >
+  <div class="someevents line" *ngIf="eventsRes.length">
     <h2>Events</h2>
     <div class="someEventsList smallList">
       <a class="event square">
@@ -41,7 +43,7 @@
       </a>
     </div>
   </div>
-  <div class="someplaylists line">
+  <div class="someplaylists line" *ngIf="playlistsRes.length">
     <h2>Playlists</h2>
     <div class="somePlaylistsList smallList">
       <a class="event square">
@@ -71,7 +73,7 @@
       </a>
     </div>
   </div>
-  <div class="somepeople line">
+  <div class="somepeople line" *ngIf="peopleRes.length">
     <h2>People</h2>
     <div class="somePeopleList smallList">
       <a class="people square">
@@ -99,6 +101,20 @@
           <div class="subtitle">MORE PEOPLE</div>
         </div>
       </a>
+    </div>
+  </div>
+
+  <div class="sometracks line" *ngIf="tracksRes.length">
+
+    <div class="someTracksList smallList">
+      <div class="track" *ngFor="let track of tracksRes">
+        <div class="nbr" (click)="listen(track.link)">></div>
+        <div class="rest">
+          <div class="songTitle">{{track.title}}</div>
+          <div class="time">{{track.duration * 1000 | date:'m:ss' }}</div>
+          <div class="songInfo">{{track.artist.name}} - {{ track.album.title }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
