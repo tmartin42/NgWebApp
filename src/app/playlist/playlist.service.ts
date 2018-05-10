@@ -11,5 +11,8 @@ export class PlaylistService {
     return this.http.get('http://localhost:3000/playlists/' + id);
   }
 
+  addTrack(playid, trackid) {
+    return this.http.post(`http://localhost:3000/playlists/${playid}/addTrack`, {trackID: trackid});
+  }
 
 }

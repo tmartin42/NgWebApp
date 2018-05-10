@@ -10,7 +10,7 @@
 
 .searchInput input {
   border: none;
-  width: calc(100% - 150px);
+  width: calc(100% - 300px);
   max-width: 1500px;
   height: 55px;
   padding: 10px 30px;
@@ -42,6 +42,7 @@ h2 {
   max-width: 1500px;
   position: relative;
   display: inline-block;
+  width: 100%;
 }
 .list {
   max-width: 1500px;
@@ -113,7 +114,7 @@ h2 {
 }
 
 .dropdown:not(.closed):hover .rollout {
-  height: 120px;
+  height: 200px;
 }
 
 .dropdown .rollout div {
@@ -123,6 +124,7 @@ h2 {
   line-height: 40px;
   text-align: left;
   padding: 0px 14px;
+  cursor: pointer;
 }
 
 .dropdown .chosen:after {
@@ -157,10 +159,10 @@ h2 {
   width: 100%;
 }
 
-.track .nbr {
-  height: 40px;
-  width: 40px;
-  line-height: 40px;
+.track .play {
+  height: 50px;
+  width: 50px;
+  line-height: 52px;
   font-size: 20px;
   position: relative;
   display: inline-block;
@@ -168,14 +170,15 @@ h2 {
   vertical-align: top;
   color: #b3b3b3;
   border: 1px solid #b3b3b3;
-  margin: 5px;
+  margin: 0px 10px 0px 5px;
   border-radius: 50px;
+  cursor: pointer;
 }
 
 .rest {
   position: relative;
   display: inline-block;
-  width: calc(100% - 60px);
+  width: calc(100% - 70px);
 }
 
 .songTitle {
@@ -199,4 +202,37 @@ h2 {
   line-height: 20px;
   font-size: 10px;
   color: #b3b3b3;
+}
+
+.sub.searchInput {
+  padding-top: 0px;
+  height: 50px;
+}
+
+.sub.searchInput, .sub.searchResult {
+  background: none;
+}
+
+.sub.searchInput input {
+  width: calc(100% - 150px);
+}
+
+.sub.searchResult .rest {
+  width: calc(100% - 130px);
+}
+
+.addSong {
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  font-size: 30px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  color: #131a1f;
+  border: 1px solid #b3b3b3;
+  /* margin: 5px; */
+  background: #b3b3b3;
+  cursor: pointer;
 }

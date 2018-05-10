@@ -34,7 +34,7 @@ export class DiscoverComponent implements OnInit {
 
   public selectTab(nbr) {
     this.tab = -1;
-    setTimeout(() => {this.tab = nbr; }, 200);
+    setTimeout(() => {this.tab = nbr; }, 100);
   }
 
   ngOnInit() {

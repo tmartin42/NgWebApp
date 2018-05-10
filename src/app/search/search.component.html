@@ -1,6 +1,6 @@
-<div class="searchInput">
+<div class="searchInput" [ngClass]="{'sub': isSubpar === true}">
   <input [(ngModel)]="searchword" placeholder="Search" (change)="search()">
-  <div class="dropdown" [ngClass]="{'closed': close == true}">
+  <div class="dropdown" [ngClass]="{'closed': close == true}" *ngIf="!isSubpar">
     <div class="chosen">{{drop}}</div>
     <div class="rollout">
       <div [ngClass]="{'hidden': dropbelow == 'Tracks'}" (click)="setdrop('Tracks')">Tracks</div>
@@ -12,7 +12,7 @@
     </div>
   </div>
 </div>
-<div class="searchResult">
+<div class="searchResult" [ngClass]="{'sub': isSubpar === true}">
   <div class="someevents line" *ngIf="eventsRes.length">
     <h2>Events</h2>
     <div class="someEventsList smallList">
@@ -74,33 +74,14 @@
     </div>
   </div>
   <div class="somepeople line" *ngIf="peopleRes.length">
-    <h2>People</h2>
-    <div class="somePeopleList smallList">
-      <a class="people square">
-        <div class="img">
-          <div class="subtitle">example people</div>
+    <div class="somePeopleList smallList" *ngFor="let guy of peopleRes">
+
+      <a class="people square" href="/profile/{{guy.id}}">
+        <div class="img" [style.backgroundImage]="'url('+ guy.pic +')'">
+          <div class="subtitle">{{guy.username}}</div>
         </div>
       </a>
-      <a class="people square">
-        <div class="img">
-          <div class="subtitle">example people</div>
-        </div>
-      </a>
-      <a class="people square">
-        <div class="img">
-          <div class="subtitle">example people</div>
-        </div>
-      </a>
-      <a class="people square">
-        <div class="img">
-          <div class="subtitle">example peoplet</div>
-        </div>
-      </a>
-      <a class="people square more" (click)="selectTab(4)">
-        <div class="img">
-          <div class="subtitle">MORE PEOPLE</div>
-        </div>
-      </a>
+      
     </div>
   </div>
 
@@ -108,12 +89,13 @@
 
     <div class="someTracksList smallList">
       <div class="track" *ngFor="let track of tracksRes">
-        <div class="nbr" (click)="listen(track.link)">></div>
+        <div class="play" (click)="listen(track.link)">></div>
         <div class="rest">
           <div class="songTitle">{{track.title}}</div>
           <div class="time">{{track.duration * 1000 | date:'m:ss' }}</div>
           <div class="songInfo">{{track.artist.name}} - {{ track.album.title }}</div>
         </div>
+        <div class="addSong" (click)="addSong(track.id)" *ngIf="isSubpar === true">+</div>
       </div>
     </div>
   </div>

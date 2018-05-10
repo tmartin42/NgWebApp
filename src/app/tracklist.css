@@ -1,0 +1,77 @@
+
+/* to remove ? or to insert ! */
+
+.track {
+  padding: 10px;
+  font-size: 16px;
+  height: 70px;
+  text-align: left;
+  color: white;
+  display: inline-block;
+  width: 100%;
+}
+
+.track .play {
+  height: 50px;
+  width: 50px;
+  line-height: 52px;
+  font-size: 20px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  color: #b3b3b3;
+  border: 1px solid #b3b3b3;
+  margin: 0px 10px 0px 5px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.rest {
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 70px);
+}
+
+.songTitle {
+  width: calc(100% - 40px);
+  position: relative;
+  display: inline-block;
+  line-height: 30px;
+}
+
+.time {
+  position: relative;
+  display: inline-block;
+  line-height: 30px;
+  color: #b3b3b3;
+  font-size: 14px;
+}
+
+.songInfo {
+  position: relative;
+  display: inline-block;
+  line-height: 20px;
+  font-size: 10px;
+  color: #b3b3b3;
+}
+
+.sub.searchResult .rest {
+  width: calc(100% - 130px);
+}
+
+.addSong {
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  font-size: 30px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  color: #131a1f;
+  border: 1px solid #b3b3b3;
+  /* margin: 5px; */
+  background: #b3b3b3;
+  cursor: pointer;
+}

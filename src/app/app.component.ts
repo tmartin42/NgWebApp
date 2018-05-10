@@ -24,7 +24,8 @@ export class AppComponent implements OnInit {
   }
 
   private fetchoembed(url) {
-    return this.jsonp.request(`https://api.deezer.com/oembed?url=${url}&output=jsonp&callback=JSONP_CALLBACK&autoplay=true`, {method: 'Get'})
+    return this.jsonp.request(`https://api.deezer.com/oembed?url=${url}&output=jsonp&callback=JSONP_CALLBACK&autoplay=true`,
+      {method: 'Get'})
       .map(res => {
         return res.json();
       });
@@ -59,8 +60,28 @@ export class AppComponent implements OnInit {
     console.log(url);
   }
 
-  onActivate(e) {console.log(e);
-    e.changeListen.subscribe(val => {this.fetchoembed(val).subscribe(res => {this.embed = res.html; console.log(res)}); } );
+  onActivate(e) {
+    if (e.changeListen) {
+      e.changeListen.subscribe(val => {
+        this.fetchoembed(val).subscribe(res => {
+          this.embed = res.html;
+        });
+      });
+    }
+  }
+
+  public loaded (e) {
+    console.log(e);
+    // contentWindow.getElementById('widget-cover-thumbnail').trigger('click');
+  }
+
+  test(e) {
+ /*   console.log('test1', e);
+    console.log ('test2', e.target.firstChild.id);
+    console.log('test3', (e.target && e.target.firstChild && e.target.firstChild.localName && e.target.firstChild.id === 'dzplayer'))
+    if (e.target && e.target.firstChild && e.target.firstChild.localName && e.target.firstChild.id === 'dzplayer') {
+      e.target.firstChild.onload(this.loaded);
+    }*/
   }
 
   ngOnInit() {

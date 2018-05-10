@@ -1,7 +1,7 @@
 export class Playlist {
      isPublic: boolean;
      contributors: object[];
-     tracks: object[];
+     tracks: any[];
      _id: string;
      title: string;
      creator: string;

@@ -5,7 +5,7 @@
     <a *ngIf="owner" href="/user/{{owner.id}}">{{owner.username}}</a>
   </div>
   <div class="img" *ngIf="owner" >
-    <img *ngIf="owner.pic" src="{{owner.pic}}"/>
+    <div *ngIf="owner.pic" [style.backgroundImage]="'url('+ owner.pic +')'"> </div>
   </div>
 </div>
 
@@ -17,57 +17,66 @@
 </div>
 <div class="tabs">
   <div class="tab" [ngClass]="{'active': tab == 1}">
-
-    <!--div class="songList smallList">
-      <div class="song">
-        <div class="nbr">1</div>
-        <div class="rest">
-          <div class="songTitle">Fury of the stromae</div>
-          <div class="time">2:42</div>
-          <div class="songInfo">Dragon force - live of Japan</div>
-        </div>
-      </div>
-      <div class="song">
-        <div class="nbr">2</div>
-        <div class="rest">
-        <div class="songTitle">Throught the fire and flame of lol</div>
-        <div class="time">2:42</div>
-        <div class="songInfo">Dragon force - live of Japan</div>
-        </div>
-      </div>
-      <div class="song">
-        <div class="nbr">3</div>
-        <div class="rest">
-        <div class="songTitle">4 seasons of dragon</div>
-        <div class="time">2:42</div>
-        <div class="songInfo">Dragon force - live of Japan</div>
-        </div>
-      </div>
-      <div class="song">
-        <div class="nbr">4</div>
-        <div class="rest">
-        <div class="songTitle">more humans than lol players</div>
-        <div class="time">2:42</div>
-        <div class="songInfo">Dragon force - live of Japan</div>
-        </div>
-      </div>
-      <div class="song">
-        <div class="nbr">5</div>
-        <div class="rest">
-        <div class="songTitle">Lets rip some powerless noobs</div>
-        <div class="time">2:42</div>
-        <div class="songInfo">Dragon force - live of Japan</div>
-        </div>
-      </div>
-      <div class="song">
-        <div class="nbr">6</div>
-        <div class="rest">
-        <div class="songTitle">Before i was young, i was younger</div>
-        <div class="time">2:42</div>
-        <div class="songInfo">Dragon force - live of Japan</div>
-        </div>
-      </div>
-    </div-->
+    <div class="songList smallList" *ngIf="playlist">
+          <div class="song" *ngFor="let track of filterNumbers(); let i = index">
+            <div class="nbr">{{i + 1}}</div>
+            <div class="rest">
+              <div class="songTitle">{{track.title}}</div>
+              <div class="time">{{track.duration * 1000 | date:'m:ss'}}</div>
+              <div class="songInfo">{{track.artist.name}} - {{ track.album.title }}</div>
+            </div>
+          </div>
+    </div>
+        <!--div class="songList smallList">
+          <div class="song">
+            <div class="nbr">1</div>
+            <div class="rest">
+              <div class="songTitle">Fury of the stromae</div>
+              <div class="time">2:42</div>
+              <div class="songInfo">Dragon force - live of Japan</div>
+            </div>
+          </div>
+          <div class="song">
+            <div class="nbr">2</div>
+            <div class="rest">
+            <div class="songTitle">Throught the fire and flame of lol</div>
+            <div class="time">2:42</div>
+            <div class="songInfo">Dragon force - live of Japan</div>
+            </div>
+          </div>
+          <div class="song">
+            <div class="nbr">3</div>
+            <div class="rest">
+            <div class="songTitle">4 seasons of dragon</div>
+            <div class="time">2:42</div>
+            <div class="songInfo">Dragon force - live of Japan</div>
+            </div>
+          </div>
+          <div class="song">
+            <div class="nbr">4</div>
+            <div class="rest">
+            <div class="songTitle">more humans than lol players</div>
+            <div class="time">2:42</div>
+            <div class="songInfo">Dragon force - live of Japan</div>
+            </div>
+          </div>
+          <div class="song">
+            <div class="nbr">5</div>
+            <div class="rest">
+            <div class="songTitle">Lets rip some powerless noobs</div>
+            <div class="time">2:42</div>
+            <div class="songInfo">Dragon force - live of Japan</div>
+            </div>
+          </div>
+          <div class="song">
+            <div class="nbr">6</div>
+            <div class="rest">
+            <div class="songTitle">Before i was young, i was younger</div>
+            <div class="time">2:42</div>
+            <div class="songInfo">Dragon force - live of Japan</div>
+            </div>
+          </div>
+        </div-->
   </div>
   <div class="tab" [ngClass]="{'active': tab == 2}">
     <div class="peopleList smallList">
@@ -98,8 +107,10 @@
       </a>
     </div>
   </div>
-  <div class="tab" [ngClass]="{'active': tab == 3}">
+  <div class="tab" [ngClass]="{'active': tab == 3}" >
+    <app-search [isSubpar]="true" (addedTrack)="addTrack($event)" (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
   </div>
   <div class="tab" [ngClass]="{'active': tab == 4}">
+    <app-search [cust]="custDrop" [isSubpar]="true" (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
   </div>
 </div>

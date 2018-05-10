@@ -21,7 +21,7 @@
   cursor: pointer;
   /* vertical-align: bottom; */
   height: 55px;
-  transition: background 0.2s;
+  transition: background 0.1s;
 }
 
 .tabbutton.active {
@@ -31,6 +31,7 @@
 .tabs {
   background: #00000042;
   min-height: calc(100% - 168px);
+  padding-top: 20px;
 }
 
 .tab {
@@ -38,15 +39,14 @@
   opacity: 0;
   height: 0;
   overflow: hidden;
-  padding-top: 20px;
   padding-bottom: 10px;
-  -webkit-transition: opacity 0.2s, height 0.2s 0s;
-  transition: opacity 0.2s, height 0.2s 0s;
+  -webkit-transition: opacity 0.1s, height 0.1s 0s;
+  transition: opacity 0.1s, height 0.1s 0s;
 }
 
 .tab.active {
   opacity: 1;
   height: auto;
   min-height: 100%;
-  transition: opacity 0.2s;
+  transition: opacity 0.1s;
 }

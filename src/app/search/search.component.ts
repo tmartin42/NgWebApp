@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {  AuthenticationService } from '../authentication/authentication.service';
@@ -12,10 +12,12 @@ import {DataService} from "../data.service";
   styleUrls: ['./search.component.css']
 })
 
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 
-
+  @Input() cust;
+  @Input() isSubpar;
   @Output() changeListen = new EventEmitter<string>();
+  @Output() addedTrack = new EventEmitter<number>();
 
   searchword = '';
   drop = 'Tracks';
@@ -30,12 +32,15 @@ export class SearchComponent {
   playlistsRes: Object[] = [];
   peopleRes: Object[] = [];
 
+
   constructor(
     private router: Router,
     private authService: AuthenticationService,
     private searchService: SearchService,
     private dataService: DataService
-  ) { }
+  ) {
+
+  }
 
   public selectTab(nbr) {
     this.tab = -1;
@@ -64,6 +69,10 @@ export class SearchComponent {
     console.log('listen');
     this.changeListen.emit(url);
   }
+  public addSong(id) {
+    console.log('listen2 ', id);
+    this.addedTrack.emit(id);
+  }
 
   public search() {
 
@@ -84,8 +93,12 @@ export class SearchComponent {
             }
           });
         });
-      } else if (this.drop === 'Tr') {
+      } else if (this.drop === 'People') {
         console.log(3);
+        this.searchService.searchPeople().subscribe(val => {
+          console.log(val);
+          this.peopleRes = val;
+        })
        /* this.searchService.searchDeezer(this.searchword, '').subscribe(val => {
           this.resetArrays();
            val.data.forEach((data) => {
@@ -100,4 +113,17 @@ export class SearchComponent {
     }
   }
 
+  ngOnInit() {
+
+    if (!this.isSubpar)
+      this.isSubpar = false;
+    if (this.cust) {
+      this.drop = this.cust;
+      this.dropbelow = this.cust;
+      console.log(this.cust);
+    } else {
+      console.log("lol");
+      console.log(this.cust);
+    }
+  }
 }

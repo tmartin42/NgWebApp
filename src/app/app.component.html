@@ -13,8 +13,8 @@
   </div>
 </div>
 <div class="wrapper" [ngClass]="{'smaller': isAuth}">
-<router-outlet (changeListen)="changeListener()" (activate)='onActivate($event)'></router-outlet>
+<router-outlet (activate)='onActivate($event)'></router-outlet>
 </div>
 <div class="bottomPlayer" *ngIf="isAuth">
-  <div  [innerHTML]="embed | sanitizeHtml"></div>
+  <div  [innerHTML]="embed | sanitizeHtml" (DOMSubtreeModified)="test($event)"></div>
 </div>

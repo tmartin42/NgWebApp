@@ -41,7 +41,7 @@ export class Artist {
 
 export class Album {
   id: number;
-  name: string;
+  title: string;
   upc: string;
   link: string;
   share: string;

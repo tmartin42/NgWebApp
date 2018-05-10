@@ -16,6 +16,12 @@ export class DataService {
     return this.http.get('http://localhost:3000/data');
   }
 
+  getTrack(id) {
+    return this.jsonp.request(`https://api.deezer.com/track/${id}?output=jsonp&callback=JSONP_CALLBACK`, {method: 'Get'})
+      .map(res => {
+        return res.json();
+      });
+  }
 
   reallisten(url) {
 
