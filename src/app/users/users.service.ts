@@ -15,4 +15,7 @@ export class UsersService {
     return this.http.get('http://localhost:3000/data');
   }
 
+  addFriend(id) {
+    return this.http.post(`http://localhost:3000/friends/${id}`, {});
+  }
 }
