@@ -24,13 +24,14 @@ export class SearchComponent implements OnInit {
   dropbelow = 'Tracks';
   tab = 1;
   close = false;
+  filterstr = '';
 
   tracksRes: Track[] = [];
   albumsRes: Album[] = [];
   eventsRes: Event[] = [];
   artistsRes: Artist[] = [];
-  playlistsRes: Object[] = [];
-  peopleRes: Object[] = [];
+  playlistsRes: any[] = [];
+  peopleRes: any[] = [];
 
 
   constructor(
@@ -50,6 +51,7 @@ export class SearchComponent implements OnInit {
   public  setdrop(str) {
     this.close = true;
     this.drop = str;
+    this.search(13);
     setTimeout(() => {
       this.close = false;
       this.dropbelow = str;
@@ -74,14 +76,11 @@ export class SearchComponent implements OnInit {
     this.addedTrack.emit(id);
   }
 
-  public search() {
-
-    console.log('1');
-    if (this.searchword !== '' && this.drop !== '') {
-      console.log(2);
+  public search(e) {
+    if ((e.keyCode === 13 || e === 13 ) && this.searchword !== '' && this.drop !== '') {
+      this.filterstr = this.searchword;
       if (this.drop === 'Tracks' || this.drop === 'Artists' || this.drop === 'Albums') {
         this.searchService.searchDeezer(this.searchword, '/' + this.drop.substring(0, this.drop.length - 1).toLowerCase()).subscribe(val => {
-          console.log(val);
           this.resetArrays();
           val.data.forEach((key) => {
             if (key.type === 'track') {
@@ -94,36 +93,32 @@ export class SearchComponent implements OnInit {
           });
         });
       } else if (this.drop === 'People') {
-        console.log(3);
+        this.resetArrays();
         this.searchService.searchPeople().subscribe(val => {
-          console.log(val);
           this.peopleRes = val;
-        })
-       /* this.searchService.searchDeezer(this.searchword, '').subscribe(val => {
-          this.resetArrays();
-           val.data.forEach((data) => {
-              if (data.type === 'track') {
-                this.tracksRes.push(data);
-              } else if (data.type === 'album') {
-                this.albumsRes.push(data);
-              }
-           });
-        });*/
+        });
+      } else if (this.drop === 'Playlists') {
+        this.resetArrays();
+        this.searchService.searchPlaylists().subscribe(val => {
+          this.playlistsRes = val;
+        });
+      } else if (this.drop === 'Events') {
+        this.resetArrays();
+        this.searchService.searchEvents().subscribe(val => {
+          this.eventsRes = val;
+        });
       }
     }
   }
 
   ngOnInit() {
 
-    if (!this.isSubpar)
+    if (!this.isSubpar) {
       this.isSubpar = false;
+    }
     if (this.cust) {
       this.drop = this.cust;
       this.dropbelow = this.cust;
-      console.log(this.cust);
-    } else {
-      console.log("lol");
-      console.log(this.cust);
     }
   }
 }

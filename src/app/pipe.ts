@@ -12,3 +12,4 @@ export class SanitizeHtml implements PipeTransform  {
     return this.sanitizer.bypassSecurityTrustHtml(value);
   }
 }
+

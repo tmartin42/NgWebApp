@@ -30,5 +30,13 @@ export class SearchService {
     return this.http.get(`http://localhost:3000/Users` );
   }
 
+
+  searchPlaylists(): Observable<any> {
+    return this.http.get(`http://localhost:3000/playlists` );
+  }
+
+  searchEvents(): Observable<any> {
+    return this.http.get(`http://localhost:3000/events` );
+  }
 }
 

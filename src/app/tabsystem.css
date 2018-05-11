@@ -31,7 +31,6 @@
 .tabs {
   background: #00000042;
   min-height: calc(100% - 168px);
-  padding-top: 20px;
 }
 
 .tab {
@@ -39,12 +38,14 @@
   opacity: 0;
   height: 0;
   overflow: hidden;
+  padding-top: 0px;
   padding-bottom: 10px;
   -webkit-transition: opacity 0.1s, height 0.1s 0s;
   transition: opacity 0.1s, height 0.1s 0s;
 }
 
 .tab.active {
+  padding-top: 20px;
   opacity: 1;
   height: auto;
   min-height: 100%;

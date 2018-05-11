@@ -1,0 +1,136 @@
+
+
+h2 {
+  position: relative;
+  display: block;
+  font-size: 20px;
+  /* height: 80px; */
+  color: white;
+  vertical-align: bottom;
+  /* line-height: 80px; */
+  padding: 0px 0px 20px;
+}
+
+
+.smallList {
+  height: 240px;
+  max-width: 1500px;
+  position: relative;
+  display: inline-block;
+}
+.list {
+  max-width: 1500px;
+  position: relative;
+  display: inline-block;
+}
+
+.square {
+  position: relative;
+  display: inline-block;
+  margin: 0px 10px;
+}
+
+.img {
+  height: 200px;
+  /* background: #5d1224; */
+  width: 200px;
+  margin: 10px 0px;
+  background: linear-gradient(45deg, #382126 0%,#0c2328 100%);
+}
+
+.subtitle {
+  color: #ececec;
+  vertical-align: bottom;
+  font-size: 14px;
+  top: 85px;
+  width: 100%;
+  padding: 0px 20px;
+  position: absolute;
+  display: block;
+}
+
+.more {
+  cursor: pointer;
+}
+
+.more .subtitle {
+  font-size: 25px;
+  padding: 0px 40px;
+  cursor: pointer;
+}
+
+
+.modalCont {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #00000052;
+  z-index: 999;
+  pointer-events: none;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+.modalCont.wait {
+  display: block;
+}
+
+.modalCont.opened {
+  opacity: 1;
+  pointer-events: auto;
+  display: block;
+  transition: opacity 0.1s;
+}
+
+.modal {
+  padding: 22px 0px 50px;
+  background: #fdfdfd;
+  width: 600px;
+  top: 290px;
+  position: relative;
+  display: block;
+  margin: -50px auto 0px;
+  transition: margin 0.1s;
+}
+
+.opened .modal {
+  margin: 0px auto 0px;
+}
+
+.modal h3 {
+  font-size: 22px;
+  padding: 18px 20px 30px;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  color: #112329;
+  cursor: pointer;
+}
+
+.modal input {
+  height: 45px;
+  width: 420px;
+  margin: 5px 10px;
+  font-size: 16px;
+  outline: none;
+  position: relative;
+  padding: 0px 10px;
+}
+
+.modal button {
+  width: 220px;
+  height: 50px;
+  border-radius: 0px;
+  -webkit-appearance: none;
+  border: none;
+  background-color: #ff3556;
+  font-size: 20px;
+  margin-top: 24px;
+  outline: none;
+  line-height: 52px;
+  color: white;
+  cursor: pointer;
+}

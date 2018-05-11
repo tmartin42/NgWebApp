@@ -7,6 +7,9 @@ import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 import {  SearchService } from './search.service';
 import {DataService} from '../data.service';
+import {FilterPeoplePipe} from "../filterPeoplePipe";
+import {FilterPlaylistPipe} from "../filterPlaylistPipe";
+import {FilterEventsPipe} from "../filterEventsPipe";
 
 @NgModule({
   imports: [
@@ -19,6 +22,6 @@ import {DataService} from '../data.service';
     SearchService,
     DataService
   ],
-  declarations: [SearchComponent]
+  declarations: [SearchComponent, FilterPeoplePipe, FilterPlaylistPipe, FilterEventsPipe]
 })
 export class SearchModule { }

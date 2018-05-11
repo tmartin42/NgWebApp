@@ -1,5 +1,5 @@
 <div class="searchInput" [ngClass]="{'sub': isSubpar === true}">
-  <input [(ngModel)]="searchword" placeholder="Search" (change)="search()">
+  <input [(ngModel)]="searchword" placeholder="Search" (keyup)="search($event)">
   <div class="dropdown" [ngClass]="{'closed': close == true}" *ngIf="!isSubpar">
     <div class="chosen">{{drop}}</div>
     <div class="rollout">
@@ -14,74 +14,36 @@
 </div>
 <div class="searchResult" [ngClass]="{'sub': isSubpar === true}">
   <div class="someevents line" *ngIf="eventsRes.length">
-    <h2>Events</h2>
     <div class="someEventsList smallList">
-      <a class="event square">
+      <a class="event square" *ngFor="let event of eventsRes | filterEvents: filterstr" href="/playlist/{{event.id}}">
         <div class="img">
-          <div class="subtitle">example event</div>
-        </div>
-      </a>
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example event</div>
-        </div>
-      </a>
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example event</div>
-        </div>
-      </a>
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example event</div>
-        </div>
-      </a>
-      <a class="event square more" (click)="selectTab(2)">
-        <div class="img">
-          <div class="subtitle">MORE EVENTS</div>
+          <div class="subtitle">
+            {{ event.title }}
+          </div>
         </div>
       </a>
     </div>
   </div>
   <div class="someplaylists line" *ngIf="playlistsRes.length">
-    <h2>Playlists</h2>
     <div class="somePlaylistsList smallList">
-      <a class="event square">
+      <a class="event square" *ngFor="let playlist of playlistsRes | filterPlaylist: filterstr" href="/playlist/{{playlist.id}}">
         <div class="img">
-          <div class="subtitle">example playlist</div>
-        </div>
-      </a>
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example playlist</div>
-        </div>
-      </a>
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example playlist</div>
-        </div>
-      </a>
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example playlist</div>
-        </div>
-      </a>
-      <a class="event square more" (click)="selectTab(3)">
-        <div class="img">
-          <div class="subtitle">MORE PLAYLISTS</div>
+          <div class="subtitle">
+            {{ playlist.title }}
+          </div>
         </div>
       </a>
     </div>
   </div>
   <div class="somepeople line" *ngIf="peopleRes.length">
-    <div class="somePeopleList smallList" *ngFor="let guy of peopleRes">
+    <div class="somePeopleList smallList" *ngFor="let guy of peopleRes | filterPeople: filterstr">
 
       <a class="people square" href="/profile/{{guy.id}}">
         <div class="img" [style.backgroundImage]="'url('+ guy.pic +')'">
           <div class="subtitle">{{guy.username}}</div>
         </div>
       </a>
-      
+
     </div>
   </div>
 

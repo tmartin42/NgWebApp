@@ -10,6 +10,9 @@ import { PlaylistComponent } from './playlist.component';
 import { SearchComponent } from "../search/search.component";
 import { SearchService } from "../search/search.service";
 import {DataService} from "../data.service";
+import {FilterPeoplePipe} from "../filterPeoplePipe";
+import {FilterPlaylistPipe} from "../filterPlaylistPipe";
+import {FilterEventsPipe} from "../filterEventsPipe";
 
 @NgModule({
   imports: [
@@ -23,6 +26,6 @@ import {DataService} from "../data.service";
     SearchService,
     DataService
   ],
-  declarations: [PlaylistComponent, SearchComponent]
+  declarations: [PlaylistComponent, SearchComponent, FilterPeoplePipe, FilterPlaylistPipe, FilterEventsPipe]
 })
 export class PlaylistModule { }

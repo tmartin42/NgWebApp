@@ -14,6 +14,11 @@ const routes: Routes = [
     loadChildren: './discover/discover.module#DiscoverModule'
   },
   {
+    path: 'yourMusic',
+    canActivate: [ ProtectedGuard ],
+    loadChildren: './yourMusic/yourMusic.module#YourMusicModule'
+  },
+  {
     path: 'playlist/:id',
     canActivate: [ ProtectedGuard ],
     loadChildren: './playlist/playlist.module#PlaylistModule'
