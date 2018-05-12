@@ -36,9 +36,10 @@
     </div>
   </div>
   <div class="somepeople line" *ngIf="peopleRes.length">
-    <div class="somePeopleList smallList" *ngFor="let guy of peopleRes | filterPeople: filterstr">
+    <div class="somePeopleList smallList">
 
-      <a class="people square" href="/profile/{{guy.id}}">
+      <a class="people square" (click)="addFriend(guy.id)" *ngFor="let guy of peopleRes | filterPeople: filterstr">
+        <div class="plus">+</div>
         <div class="img" [style.backgroundImage]="'url('+ guy.pic +')'">
           <div class="subtitle">{{guy.username}}</div>
         </div>

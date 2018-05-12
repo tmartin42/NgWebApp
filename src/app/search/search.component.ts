@@ -5,6 +5,7 @@ import {  AuthenticationService } from '../authentication/authentication.service
 import {  SearchService } from './search.service';
 import {  DeezerResult, DeezerResponse, Artist, Album, Genres, Track  } from './deezerResult';
 import {DataService} from "../data.service";
+import {UsersService} from "../users/users.service";
 
 @Component({
   selector: 'app-search',
@@ -18,6 +19,7 @@ export class SearchComponent implements OnInit {
   @Input() isSubpar;
   @Output() changeListen = new EventEmitter<string>();
   @Output() addedTrack = new EventEmitter<number>();
+  @Output() addContributor = new EventEmitter<number>();
 
   searchword = '';
   drop = 'Tracks';
@@ -38,7 +40,8 @@ export class SearchComponent implements OnInit {
     private router: Router,
     private authService: AuthenticationService,
     private searchService: SearchService,
-    private dataService: DataService
+    private dataService: DataService,
+    private usersService: UsersService
   ) {
 
   }
@@ -65,6 +68,14 @@ export class SearchComponent implements OnInit {
     this.artistsRes = [];
     this.playlistsRes = [];
     this.peopleRes = [];
+  }
+
+  public addFriend(id) {
+    if (!this.isSubpar) {
+      this.usersService.addFriend(id).subscribe(val => {console.log(val); });
+    } else {
+      this.addContributor.emit(id);
+    }
   }
 
   public listen(url) {

@@ -463,9 +463,10 @@
   <div class="tab" [ngClass]="{'active': tab == 4}">
     <div class="somepeople line" *ngIf="friends">
       <h2>Friends</h2>
-      <div class="somePeopleList smallList" *ngFor="let guy of friends">
+      <div class="somePeopleList smallList">
 
-        <a class="people square" href="/profile/{{guy.id}}">
+        <a class="people square" *ngFor="let guy of friends"  (click)="removeFriend(guy.id)">
+          <div class="minus">-</div>
           <div class="img" [style.backgroundImage]="'url('+ guy.pic +')'">
             <div class="subtitle">{{guy.username}}</div>
           </div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import {  AuthenticationService } from '../authentication/authentication.service';
 import { YourMusicService } from './yourMusic.service';
+import {UsersService} from "../users/users.service";
 
 @Component({
   selector: 'app-yourMusic',
@@ -16,7 +17,7 @@ export class YourMusicComponent implements OnInit {
 
 
   playlists: any;
-  friends: any;
+  friends: any[] = [];
   tab = 1;
   activateModal = false;
   modalTitle = '';
@@ -28,21 +29,20 @@ export class YourMusicComponent implements OnInit {
   constructor(
     private router: Router,
     private yourMusicService: YourMusicService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private usersService: UsersService
   ) {
   }
 
   public loadData() {
 
-    this.yourMusicService.getMe().subscribe(val => {
-      this.me = val;
-      this.friends = this.me.friends;
-    });
     this.yourMusicService.getPlaylists().subscribe(val => {
       this.playlists = val;
     });
     this.yourMusicService.getFriends().subscribe(val => {
-      this.playlists = val;
+      val.forEach((key, id) => {
+        this.usersService.getUser(key).subscribe(vel => this.friends.push(vel));
+      });
     });
   }
 
@@ -61,6 +61,17 @@ export class YourMusicComponent implements OnInit {
         console.log(val);
       });
     }
+  }
+
+  public removeFriend(id) {
+    this.usersService.removeFriend(id).subscribe(val => {
+      console.log(val);
+      this.friends.forEach((key, ids) => {
+        if (key.id === id) {
+          this.friends.splice(ids, 1);
+        }
+      });
+    });
   }
 
   public closeModal(e) {

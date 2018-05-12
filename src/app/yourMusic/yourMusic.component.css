@@ -27,26 +27,49 @@ h2 {
 .square {
   position: relative;
   display: inline-block;
-  margin: 0px 10px;
+  margin: 10px 10px;
+  cursor: pointer;
 }
 
 .img {
   height: 200px;
   /* background: #5d1224; */
   width: 200px;
-  margin: 10px 0px;
   background: linear-gradient(45deg, #382126 0%,#0c2328 100%);
+  background-position: 50%;
+  background-size: cover;
+  box-shadow: 0px -120px 110px -60px #000000ed inset;
 }
 
 .subtitle {
   color: #ececec;
   vertical-align: bottom;
   font-size: 14px;
-  top: 85px;
+  bottom: 0px;
   width: 100%;
   padding: 0px 20px;
   position: absolute;
   display: block;
+  height: 30px;
+}
+
+.square .minus {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #420000cc;
+  position: absolute;
+  color: white;
+  font-size: 105px;
+  /* z-index: 6; */
+  line-height: 210px;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.square:hover .minus {
+  opacity: 1;
 }
 
 .more {
@@ -57,6 +80,7 @@ h2 {
   font-size: 25px;
   padding: 0px 40px;
   cursor: pointer;
+  top: 85px;
 }
 
 

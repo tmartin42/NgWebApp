@@ -18,4 +18,8 @@ export class UsersService {
   addFriend(id) {
     return this.http.post(`http://localhost:3000/friends/${id}`, {});
   }
+
+  removeFriend(id) {
+    return this.http.delete(`http://localhost:3000/friends/${id}`, {});
+  }
 }

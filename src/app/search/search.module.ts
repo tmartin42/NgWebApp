@@ -10,6 +10,7 @@ import {DataService} from '../data.service';
 import {FilterPeoplePipe} from "../filterPeoplePipe";
 import {FilterPlaylistPipe} from "../filterPlaylistPipe";
 import {FilterEventsPipe} from "../filterEventsPipe";
+import {UsersService} from "../users/users.service";
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {FilterEventsPipe} from "../filterEventsPipe";
   ],
   providers: [
     SearchService,
-    DataService
+    DataService,
+    UsersService
   ],
   declarations: [SearchComponent, FilterPeoplePipe, FilterPlaylistPipe, FilterEventsPipe]
 })

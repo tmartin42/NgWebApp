@@ -54,6 +54,7 @@ h2 {
   position: relative;
   display: inline-block;
   margin: 10px 10px;
+  cursor: pointer;
 }
 
 .img {
@@ -76,6 +77,25 @@ h2 {
   position: absolute;
   display: block;
   height: 30px;
+}
+
+.square .plus {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000000cc;
+  position: absolute;
+  color: white;
+  font-size: 95px;
+  /* z-index: 6; */
+  line-height: 210px;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.square:hover .plus {
+  opacity: 1;
 }
 
 .more {
@@ -144,6 +164,7 @@ h2 {
   transform: rotate(135deg);
   transition: 0.2s ease;
 }
+
 .dropdown:not(.closed):hover .chosen:after {
   transform: rotate(45deg);
   right: 19px;

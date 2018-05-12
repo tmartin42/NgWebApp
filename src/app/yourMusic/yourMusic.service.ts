@@ -16,8 +16,8 @@ export class YourMusicService {
     return this.http.get('http://localhost:3000/user/me');
   }
 
-  getFriends() {
-    return this.http.get('http://localhost:3000/users/me');
+  getFriends(): Observable<any> {
+    return this.http.get('http://localhost:3000/friends');
   }
 
   newPlaylist(title) {

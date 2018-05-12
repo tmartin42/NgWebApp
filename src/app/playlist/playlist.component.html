@@ -4,7 +4,7 @@
     <p>{{ playlist.tracks.length }} song - {{ playlist.contributors.length }} contributors</p>
     <a *ngIf="owner" href="/user/{{owner.id}}">{{owner.username}}</a>
   </div>
-  <div class="img" *ngIf="owner" >
+  <div class="imgp" *ngIf="owner" >
     <div *ngIf="owner.pic" [style.backgroundImage]="'url('+ owner.pic +')'"> </div>
   </div>
 </div>
@@ -18,13 +18,15 @@
 <div class="tabs">
   <div class="tab" [ngClass]="{'active': tab == 1}">
     <div class="songList smallList" *ngIf="playlist">
-          <div class="song" *ngFor="let track of filterNumbers(); let i = index">
-            <div class="nbr">{{i + 1}}</div>
-            <div class="rest">
+          <div class="song" *ngFor="let track of tracks; let i = index" (mouseover)="over($event)" [ngClass]="{'moving': movid === track.id}" [ngStyle]="style" (mousemove)="move($event)">
+            <div class="nbr" *ngIf="track.title">{{i + 1}}</div>
+            <div class="rest" *ngIf="track.title">
               <div class="songTitle">{{track.title}}</div>
               <div class="time">{{track.duration * 1000 | date:'m:ss'}}</div>
               <div class="songInfo">{{track.artist.name}} - {{ track.album.title }}</div>
             </div>
+            <div class="moveSong" (mousedown)="moveTrack($event, track.id, i)" (mouseup)="releaseTrack($event)" *ngIf="track.title">=</div>
+            <div class="removeSong" (click)="removeTrack(track.id)" *ngIf="track.title">-</div>
           </div>
     </div>
         <!--div class="songList smallList">
@@ -79,38 +81,21 @@
         </div-->
   </div>
   <div class="tab" [ngClass]="{'active': tab == 2}">
-    <div class="peopleList smallList">
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example event</div>
+    <div class="somePeopleList smallList">
+
+      <a class="people square" *ngFor="let Contributor of contributors"  (click)="removeContributor(Contributor.id)">
+        <div class="minus">-</div>
+        <div class="img" [style.backgroundImage]="'url('+ Contributor.pic +')'">
+          <div class="subtitle">{{Contributor.username}}</div>
         </div>
       </a>
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example event</div>
-        </div>
-      </a>
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example event</div>
-        </div>
-      </a>
-      <a class="event square">
-        <div class="img">
-          <div class="subtitle">example event</div>
-        </div>
-      </a>
-      <a class="event square more" (click)="selectTab(2)">
-        <div class="img">
-          <div class="subtitle">MORE EVENTS</div>
-        </div>
-      </a>
+
     </div>
   </div>
   <div class="tab" [ngClass]="{'active': tab == 3}" >
     <app-search [isSubpar]="true" (addedTrack)="addTrack($event)" (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
   </div>
   <div class="tab" [ngClass]="{'active': tab == 4}">
-    <app-search [cust]="custDrop" [isSubpar]="true" (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
+    <app-search [cust]="custDrop" [isSubpar]="true" (addContributor)="addContributor($event)"  (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
   </div>
 </div>
