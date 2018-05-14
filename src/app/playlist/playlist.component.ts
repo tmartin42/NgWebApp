@@ -33,9 +33,6 @@ export class PlaylistComponent implements OnInit {
   tracks: any[] = [];
   tracksOK = false;
   moveit = false;
-  moving;
-  movid;
-  style;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +47,10 @@ export class PlaylistComponent implements OnInit {
 
   public addTrack(e) {
     console.log("addtrack", e);
-    this.playlistService.addTrack(this.playlist.id, e).subscribe(val => {console.log(val); });
+    this.playlistService.addTrack(this.playlist.id, e).subscribe(val => {
+      console.log(e);
+
+    });
   }
 
   public addContributor(e) {
@@ -83,38 +83,29 @@ export class PlaylistComponent implements OnInit {
     });
   }
 
-  public move(e) {
-    if (this.moveit && this.moving === e.target) {
-      let mov;
-      console.log(e);
-      if (e.target.className === 'song') {
-        console.log(1);
-        mov = e.target;
-      } else if (e.target.parentNode.className === 'song') {
-        console.log(2);
-        mov = e.target.parentNode;
-      } else if (e.target.parentNode.parentNode.className === 'song' ) {
-        console.log(3);
-        mov = e.target.parentNode.parentNode;
-      }
-      if (mov) {
-        //  const mov = e.target.parent  .getElementsByClassName('moveSong');
-        const x = (e.clientX - this.ox) + mov.parentNode.offsetLeft;
-        const y = ( e.clientY - this.oy) + mov.parentNode.offsetTop;
-        this.style = {top: `${y}px`, left: `${x}px`};
-        console.log({top: `${y}px`, left: `${x}px`})
-      }
+  moveBot(tid, id) {
+    console.log(id);
+    if (id < this.tracks.length - 1 && id >= 0) {
+      this.playlistService.moveTrack(this.playlist.id, tid, id + 1).subscribe(val => {
+        console.log(val);
+        const tmp = this.tracks[id];
+        const tmp2 = this.tracks[id + 1];
+        this.tracks[id] = tmp2;
+        this.tracks[id + 1] = tmp;
+      });
     }
   }
 
-  public over(e) {
-    console.log(e.srcElement);
-  }
-
-  public releaseTrack(e) {
-    this.movid = null;
-    this.moveit = false;
-    this.moving = null;
+  moveTop(tid, id) {
+    if (id > 0 && id <= this.tracks.length - 1) {
+      this.playlistService.moveTrack(this.playlist.id, tid, id - 1).subscribe(val => {
+        console.log(val);
+        const tmp = this.tracks[id];
+        const tmp2 = this.tracks[id - 1];
+        this.tracks[id] = tmp2;
+        this.tracks[id - 1] = tmp;
+      });
+    }
   }
 
   public subchangeListen(e) {
@@ -131,38 +122,18 @@ export class PlaylistComponent implements OnInit {
     setTimeout(() => {this.tab = nbr; }, 200);
   }
 
-  ox = 0;
-  oy = 0;
 
-  public moveTrack(e, id, index) {
-
-    console.log(e);
-
-    if (e.target.className === 'moveSong') {
-      this.moveit = true;
-      this.moving = e.target.parentNode;
-      console.log(id);
-      this.tracks.splice(index, 0, {});
-      console.log(this.moving);
-      this.movid = id;
-      this.ox = e.clientX;
-      this.oy = e.clientY;
-      const x = e.target.parentNode.parentNode.offsetLeft;
-      const y = e.target.parentNode.parentNode.offsetTop;
-      this.style = {top: `${y}px`, left: `${x}px`};
-    }
-  }
 
   private getPlaylist() {
     this.playlistService.getPlaylist(this.route.snapshot.paramMap.get('id')).subscribe(val => {
       this.playlist = val;
 
       val.tracks.forEach((key, id) => {
-        this.dataService.getTrack(key).subscribe(vel => this.tracks.push(vel));
+        this.dataService.getTrack(key).subscribe(vel => this.tracks[id] = vel);
       });
 
       val.contributors.forEach((key, id) => {
-        this.usersService.getUser(key).subscribe(vel => this.contributors.push(vel));
+        this.usersService.getUser(key).subscribe(vel => this.contributors[id] = vel);
       });
 
       this.usersService.getUser(val.creator).subscribe(owner => this.owner = owner);

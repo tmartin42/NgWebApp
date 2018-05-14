@@ -14,19 +14,20 @@
   <div class="tab2 tabbutton" [ngClass]="{'active': tab == 2}" (click)="selectTab(2)">Contributors</div>
   <div class="tab1 tabbutton right" [ngClass]="{'active': tab == 3}" (click)="selectTab(3)">Add songs</div>
   <div class="tab2 tabbutton right" [ngClass]="{'active': tab == 4}" (click)="selectTab(4)">Add people</div>
+  <div class="tab2 tabbutton right" [ngClass]="{'active': tab == 5}" (click)="selectTab(5)">Edit playlist</div>
 </div>
 <div class="tabs">
   <div class="tab" [ngClass]="{'active': tab == 1}">
     <div class="songList smallList" *ngIf="playlist">
-          <div class="song" *ngFor="let track of tracks; let i = index" (mouseover)="over($event)" [ngClass]="{'moving': movid === track.id}" [ngStyle]="style" (mousemove)="move($event)">
-            <div class="nbr" *ngIf="track.title">{{i + 1}}</div>
-            <div class="rest" *ngIf="track.title">
+          <div class="song" *ngFor="let track of tracks; let i = index">
+            <div class="nbr" *ngIf="track">{{i + 1}}</div>
+            <div class="rest" *ngIf="track">
               <div class="songTitle">{{track.title}}</div>
               <div class="time">{{track.duration * 1000 | date:'m:ss'}}</div>
               <div class="songInfo">{{track.artist.name}} - {{ track.album.title }}</div>
             </div>
-            <div class="moveSong" (mousedown)="moveTrack($event, track.id, i)" (mouseup)="releaseTrack($event)" *ngIf="track.title">=</div>
-            <div class="removeSong" (click)="removeTrack(track.id)" *ngIf="track.title">-</div>
+            <div class="moveSong" *ngIf="track"><div  *ngIf="i === 0"></div><div (click)="moveTop(track.id, i)" *ngIf="i !== 0">▲</div><div (click)="moveBot(track.id, i)" *ngIf="i !== tracks.length - 1">▼</div><div  *ngIf="i === tracks.length - 1"></div></div>
+            <div class="removeSong" (click)="removeTrack(track.id)" *ngIf="track">-</div>
           </div>
     </div>
         <!--div class="songList smallList">
@@ -97,5 +98,7 @@
   </div>
   <div class="tab" [ngClass]="{'active': tab == 4}">
     <app-search [cust]="custDrop" [isSubpar]="true" (addContributor)="addContributor($event)"  (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
+  </div>
+  <div class="tab" [ngClass]="{'active': tab == 5}">
   </div>
 </div>

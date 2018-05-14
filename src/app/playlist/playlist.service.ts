@@ -26,4 +26,8 @@ export class PlaylistService {
   removeTrack(playid, id) {
     return this.http.request('post', `http://localhost:3000/playlists/${playid}/removeTrack`, {body: {trackID: id}});
   }
+
+  moveTrack(playid, tid, id) {
+    return this.http.request('post', `http://localhost:3000/playlists/${playid}/moveTrack`, {body: {trackID: tid, newPos: id}});
+  }
 }

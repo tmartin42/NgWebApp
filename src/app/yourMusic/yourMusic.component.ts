@@ -40,9 +40,7 @@ export class YourMusicComponent implements OnInit {
       this.playlists = val;
     });
     this.yourMusicService.getFriends().subscribe(val => {
-      val.forEach((key, id) => {
-        this.usersService.getUser(key).subscribe(vel => this.friends.push(vel));
-      });
+      this.friends = val;
     });
   }
 

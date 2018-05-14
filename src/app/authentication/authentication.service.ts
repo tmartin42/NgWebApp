@@ -97,7 +97,7 @@ export class AuthenticationService implements AuthService {
 
   public signup(username, email, password): Observable<any> {
     console.log("signup");
-    return this.http.post(`http://localhost:3000/user/signup`, {username: username, mail: email, password: password}, { headers: {'Content-Type': 'application/x-www-form-urlencoded'}} )
+    return this.http.post(`http://localhost:3000/user/signup`, {username: username, mail: email, password: password}  )
       .do((tokens: string) => this.saveAccessData(tokens));
   }
   /**

@@ -53,6 +53,12 @@ body, html {
   font-family: "heiti tc";
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
 .wrapper {
   min-height: 100%;
   position: absolute;
