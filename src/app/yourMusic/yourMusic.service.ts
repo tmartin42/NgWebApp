@@ -21,7 +21,11 @@ export class YourMusicService {
   }
 
   newPlaylist(title) {
-    return this.http.post(`http://localhost:3000/playlists`, {title: title}, {responseType: 'text'});
+    return this.http.post(`http://localhost:3000/playlists`, {title: title});
+  }
+
+  newEvent(title) {
+    return this.http.post(`http://localhost:3000/events`, {title: title});
   }
 
   getData() {

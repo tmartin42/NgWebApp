@@ -4,6 +4,8 @@ import {  AuthenticationService } from './authentication/authentication.service'
 import { extract } from 'oembed-parser';
 import { Jsonp } from '@angular/http';
 import { DataService } from './data.service';
+import { ErrorService } from "./error.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-root',
@@ -30,6 +32,12 @@ export class AppComponent implements OnInit {
         return res.json();
       });
   }
+
+
+
+  public addError(e) {
+    this.errorService.addError(e);
+  }
 /*
   listen(url) {
 
@@ -47,7 +55,8 @@ export class AppComponent implements OnInit {
     private router: Router,
     private authService: AuthenticationService,
     private jsonp: Jsonp,
-    private dataService: DataService
+    private dataService: DataService,
+    public errorService: ErrorService
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -68,6 +77,16 @@ export class AppComponent implements OnInit {
         });
       });
     }
+    if (e.errorEvent) {
+
+      e.errorEvent.subscribe(val=>{
+        this.addError(val);
+      })
+    }
+  }
+
+  public closeError(id) {
+    this.errorService.removeError(id);
   }
 
   public loaded (e) {
@@ -86,7 +105,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getAuth();
-
     /*extract('https://api.deezer.com/oembed?url=http://www.deezer.com/track/3135556').then((error, result) => {
       if (error) {
         console.error(error);

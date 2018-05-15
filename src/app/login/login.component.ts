@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication/authentication.service';
 
@@ -9,6 +9,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 export class LoginComponent {
 
+  @Output() errorEvent = new EventEmitter<any>();
   usernameLogin = '';
   passwordLogin = '';
   usernameRegister = '';
@@ -26,10 +27,17 @@ export class LoginComponent {
   public login(username, password) {
     this.authService
       .login(username, password)
-      .subscribe(() => this.router.navigateByUrl('/'));
+      .subscribe(() => this.router.navigateByUrl('/'), err => {
+      console.log(err);
+      if (err.error && err.error.result) {
+        this.errorEvent.emit(err.error.result);
+      } else {
+        this.errorEvent.emit("Unknown error in login");
+      }
+      });
   }
   public register(username, email, password, passwordConfirm) {
-    if (password == passwordConfirm)
+    if (password === passwordConfirm)
     {
       this.authService
         .signup(username, email, password)

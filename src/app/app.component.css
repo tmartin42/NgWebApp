@@ -60,3 +60,57 @@
   width: 100%;
   margin-bottom: 10px;
 }
+
+.errorWrapper {
+  display: block;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+.error {
+  background: #fd4343;
+  padding: 20px 30px;
+  /* font-size: 18px; */
+  width: 470px;
+  text-align: left;
+  display: block;
+  position: relative;
+  margin-bottom: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: opacity 0.2s, margin-bottom 0.2s ease-out;
+}
+
+.error.trans {
+  opacity: 0;
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+.error.closing {
+  font-size: 0px;
+  padding: 0px 30px;
+  opacity: 0;
+  margin-bottom: 0px;
+  pointer-events: none;
+  transition: font-size 0.2s 0.2s ease, padding 0.2s 0.2s ease, margin-bottom 0.2s 0.2s ease, opacity 0.2s;
+}
+
+.error.closing .errorMsg, .error.closing .close {
+  font-size: 0px;
+  transition: font-size 0.2s 0.2s ease;
+}
+
+.errorMsg {
+  display: inline-block;
+  width: calc(100% - 30px);
+  font-size: 18px;
+  color: white;
+}
+
+.close {
+  display: inline-block;
+  width: 30px;
+  font-size: 18px;
+  text-align: right;
+}

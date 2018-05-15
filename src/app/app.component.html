@@ -13,7 +13,13 @@
   </div>
 </div>
 <div class="wrapper" [ngClass]="{'smaller': isAuth}">
-<router-outlet (activate)='onActivate($event)'></router-outlet>
+<router-outlet (activate)='onActivate($event)' (errorEvent)="addError($event)"></router-outlet>
+  <div class="errorWrapper" >
+    <div class="error" *ngFor="let error of this.errorService.errors; let i = index" (click)="closeError(i)" [ngClass]="{'closing': (errorService.closing[i].val === true && errorService.closing[i].id === error.id), 'trans': errorService.trans[i]}">
+      <div class="errorMsg">{{error.err}}</div>
+      <div class="close">x</div>
+    </div>
+  </div>
 </div>
 <div class="bottomPlayer" *ngIf="isAuth">
   <div  [innerHTML]="embed | sanitizeHtml" (DOMSubtreeModified)="test($event)"></div>

@@ -150,6 +150,10 @@ h2 {
   cursor: pointer;
 }
 
+.dropdown .rollout div:hover {
+  background: #ffffff14;
+}
+
 .dropdown .chosen:after {
   content: '';
   position: absolute;

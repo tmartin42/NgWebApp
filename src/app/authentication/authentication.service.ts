@@ -91,7 +91,7 @@ export class AuthenticationService implements AuthService {
 
 
   public login(username, password): Observable<any> {
-    return this.http.post(`http://localhost:3000/user/login`, {username: username, password: password}, {responseType: 'text'} )
+    return this.http.post(`http://localhost:3000/user/login`, {username: username, password: password}  )
       .do((tokens: string) => this.saveAccessData(tokens));
   }
 

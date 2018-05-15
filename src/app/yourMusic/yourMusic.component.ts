@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -16,6 +16,7 @@ import {UsersService} from "../users/users.service";
 export class YourMusicComponent implements OnInit {
 
 
+  @Output() errorEvent = new EventEmitter<string>();
   playlists: any;
   friends: any[] = [];
   tab = 1;
@@ -45,7 +46,6 @@ export class YourMusicComponent implements OnInit {
   }
 
   private resetModal() {
-    console.log('rrrreset');
     this.modalTitle = '';
     this.modalInput = '';
     this.modalType = '';
@@ -54,11 +54,28 @@ export class YourMusicComponent implements OnInit {
 
   public confirmModal() {
     if (this.modalType === 'playlist') {
-      console.log(this.modalInput);
       this.yourMusicService.newPlaylist(this.modalInput).subscribe(val => {
-        console.log(val);
+        this.playlists.push(val);
+        }, err => {
+        if (err.error && err.error.result) {
+          this.errorEvent.emit(err.error.result);
+        } else {
+          this.errorEvent.emit("Unknown error in login");
+        }
       });
+    } else if (this.modalType === 'event') {
+      this.yourMusicService.newEvent(this.modalInput).subscribe(val => {
+        console.log(val);
+      }, err => {
+        console.log(err);
+        if (err.error && err.error.result) {
+          this.errorEvent.emit(err.error.result);
+        } else {
+          this.errorEvent.emit("Unknown error in login");
+        }
+    });
     }
+    this.closeModal({srcElement: {className: 'modalCont opened'}});
   }
 
   public removeFriend(id) {
@@ -69,13 +86,13 @@ export class YourMusicComponent implements OnInit {
           this.friends.splice(ids, 1);
         }
       });
-    });
+    }, error => {
+      this.errorEvent.emit(`Unknow error while removing friend ${id}`);
+      });
   }
 
   public closeModal(e) {
-    console.log(e);
     if (e.srcElement.className === 'modalCont opened') {
-      console.log('reset');
       this.activateModal = false;
       this.resetModal();
     }
@@ -84,6 +101,12 @@ export class YourMusicComponent implements OnInit {
   public newPlaylist() {
     this.modalTitle = 'New Playlist';
     this.modalType = 'playlist';
+    this.activateModal = true;
+    this.modalPlaceHolder = 'Title';
+  }
+  public newEvent() {
+    this.modalTitle = 'New Event';
+    this.modalType = 'event';
     this.activateModal = true;
     this.modalPlaceHolder = 'Title';
   }

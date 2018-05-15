@@ -4,30 +4,34 @@ import { Observable } from 'rxjs/Observable';
 import { Jsonp } from '@angular/http';
 
 @Injectable()
-export class DataService {
+export class ErrorService {
 
   constructor(private http: HttpClient, private jsonp: Jsonp) {}
 
-  getUsers(): Observable<any> {
-    return this.http.get(`http://localhost:3000/playlists` );
+  public trans: boolean[] = [];
+  public closing: any[] = [];
+  public errors: any[] = [];
+
+  addError(err) {
+    const i = this.trans.length;
+    this.trans.push(true);
+    this.closing.push({val: false, id: i});
+    this.errors.push({err: err, id: i});
+    setTimeout(() => {
+        this.trans[i] = false;
+    }, 100);
+    console.log('added error:', this.errors);
   }
 
-  getData() {
-    return this.http.get('http://localhost:3000/data');
+
+  removeError(id: number) {
+    this.closing[id] = {val: true, id: this.closing[id].id};
+    setTimeout(() => {
+      this.trans.splice(id, 1);
+      this.closing.splice(id, 1);
+      this.errors.splice(id, 1);
+      }, 400);
+
   }
 
-  getTrack(id) {
-    return this.jsonp.request(`https://api.deezer.com/track/${id}?output=jsonp&callback=JSONP_CALLBACK`, {method: 'Get'})
-      .map(res => {
-        return res.json();
-      });
-  }
-
-  reallisten(url) {
-
-    return this.jsonp.request(`https://api.deezer.com/oembed?url=${url}&output=jsonp&callback=JSONP_CALLBACK`, {method: 'Get'})
-      .map(res => {
-        return res.json();
-      });
-  }
 }

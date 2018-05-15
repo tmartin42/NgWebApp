@@ -8,6 +8,7 @@ import { JsonpModule, Jsonp } from '@angular/http';
 import { AppComponent } from './app.component';
 import { SanitizeHtml } from './pipe';
 import { DataService } from "./data.service";
+import { ErrorService } from "./error.service";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { DataService } from "./data.service";
     JsonpModule
   ],
   providers: [
-    DataService
+    DataService,
+    ErrorService
   ],
   declarations: [
     AppComponent,
