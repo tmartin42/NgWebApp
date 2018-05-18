@@ -6,6 +6,7 @@ import { Jsonp } from '@angular/http';
 import { DataService } from './data.service';
 import { ErrorService } from "./error.service";
 import {Observable} from "rxjs/Observable";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,8 @@ export class AppComponent implements OnInit {
   search = '';
   isAuth = false;
   embed;
+  color = 1;
+  src;
 
   subscription: any;
 
@@ -56,7 +59,8 @@ export class AppComponent implements OnInit {
     private authService: AuthenticationService,
     private jsonp: Jsonp,
     private dataService: DataService,
-    public errorService: ErrorService
+    public errorService: ErrorService,
+    public sanitizer: DomSanitizer
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -70,18 +74,30 @@ export class AppComponent implements OnInit {
   }
 
   onActivate(e) {
+    if (this.errorService.errors.length > 0 ) {
+      this.errorService.errors = [];
+    }
     if (e.changeListen) {
       e.changeListen.subscribe(val => {
-        this.fetchoembed(val).subscribe(res => {
+        console.log(val);
+        this.src = this.sanitizer.bypassSecurityTrustResourceUrl(`http://www.deezer.com/plugins/player?type=tracks&id=${val}&autoplay=true`);
+
+      /*  this.fetchoembed(val).subscribe(res => {
           this.embed = res.html;
-        });
+        });*/
       });
     }
     if (e.errorEvent) {
 
-      e.errorEvent.subscribe(val=>{
+      e.errorEvent.subscribe(val => {
         this.addError(val);
-      })
+      });
+    }
+    if (e.colorEvent) {
+      e.colorEvent.subscribe( val => {
+
+        this.color = val;
+      });
     }
   }
 
@@ -105,6 +121,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getAuth();
+
     /*extract('https://api.deezer.com/oembed?url=http://www.deezer.com/track/3135556').then((error, result) => {
       if (error) {
         console.error(error);

@@ -1,18 +1,19 @@
 <div class="leftTab" *ngIf="isAuth">
   <div class="leftSep"></div>
-  <a class="leftLink" href="/search">Search</a>
+  <a class="leftLink" routerLink="/search">Search</a>
   <div class="leftSep"></div>
-  <a class="leftLink" href="/yourMusic">Your music</a>
-  <a class="leftLink" href="/discover">Discover</a>
+  <a class="leftLink" routerLink="/yourMusic">Your music</a>
+
+  <a class="leftLink" routerLink="/discover">Discover</a>
   <div class="leftSep"></div>
 
   <div class="bottom">
     <a class="yourname" (click)="logout()"><div class="profile">Logout</div></a>
   <div class="leftSep"></div>
-   <a class="yourname" href="/profile"><div class="profile">Kultainen</div></a>
+   <a class="yourname" routerLink="/profile"><div class="profile">Kultainen</div></a>
   </div>
 </div>
-<div class="wrapper" [ngClass]="{'smaller': isAuth}">
+<div class="wrapper" [ngClass]="{'smaller': isAuth, 'red': color === 1, 'yellow': color === 2, 'blue': color === 3}" >
 <router-outlet (activate)='onActivate($event)' (errorEvent)="addError($event)"></router-outlet>
   <div class="errorWrapper" >
     <div class="error" *ngFor="let error of this.errorService.errors; let i = index" (click)="closeError(i)" [ngClass]="{'closing': (errorService.closing[i].val === true && errorService.closing[i].id === error.id), 'trans': errorService.trans[i]}">
@@ -22,5 +23,7 @@
   </div>
 </div>
 <div class="bottomPlayer" *ngIf="isAuth">
-  <div  [innerHTML]="embed | sanitizeHtml" (DOMSubtreeModified)="test($event)"></div>
+
+  <iframe [src]="src" *ngIf="src" class="player"></iframe>
+  <!--div  [innerHTML]="embed | sanitizeHtml" (DOMSubtreeModified)="test($event)"></div-->
 </div>

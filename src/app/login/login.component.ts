@@ -25,25 +25,50 @@ export class LoginComponent {
   }
 
   public login(username, password) {
+    if (username === '' || password === '') {
+      return ;
+    }
     this.authService
       .login(username, password)
       .subscribe(() => this.router.navigateByUrl('/'), err => {
-      console.log(err);
-      if (err.error && err.error.result) {
-        this.errorEvent.emit(err.error.result);
-      } else {
-        this.errorEvent.emit("Unknown error in login");
-      }
+        let str;
+        if (err.error) {
+          str = JSON.parse(err.error);
+        }
+        if (err.error && str && str.result) {
+          this.errorEvent.emit(str.result);
+        } else {
+          this.errorEvent.emit('Unknown error in login');
+        }
       });
   }
   public register(username, email, password, passwordConfirm) {
-    if (password === passwordConfirm)
-    {
+    if (password !== passwordConfirm) {
+      this.errorEvent.emit('password must be the same as confirmation');
+    } else if (username === '' || email === '' || password === '') {
+      return;
+    } else if (username.length < 3) {
+      this.errorEvent.emit('username is too short');
+    } else if (password.length < 8 || /.*\d+.*/.test(password) === false) {
+      this.errorEvent.emit('password must be at least 8 characters long and have a number.');
+    } else if (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) === false) {
+      this.errorEvent.emit('email must be valid.');
+    } else {
       this.authService
         .signup(username, email, password)
-        .subscribe(() => this.router.navigateByUrl('/'));
+        .subscribe(() => this.router.navigateByUrl('/'),
+          err => {
+            let str;
+            if (err.error) {
+              str = JSON.parse(err.error);
+            }
+            if (err.error && str && str.result) {
+              this.errorEvent.emit(str.result);
+            } else {
+              this.errorEvent.emit('Unknown error in signin');
+            }
+          });
     }
-    console.log('register');
   }
 
   public doubletab(isleft) {

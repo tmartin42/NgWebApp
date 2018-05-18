@@ -4,10 +4,11 @@
     <div class="chosen">{{drop}}</div>
     <div class="rollout">
       <div [ngClass]="{'hidden': dropbelow == 'Tracks'}" (click)="setdrop('Tracks')">Tracks</div>
-      <div [ngClass]="{'hidden': dropbelow == 'Artists'}" (click)="setdrop('Artists')">Artists</div>
-      <div [ngClass]="{'hidden': dropbelow == 'Albums'}" (click)="setdrop('Albums')">Albums</div>
       <div [ngClass]="{'hidden': dropbelow == 'Events'}" (click)="setdrop('Events')">Events</div>
-      <div [ngClass]="{'hidden': dropbelow == 'Playlists'}" (click)="setdrop('Playlists')">Playlists</div>
+      <div [ngClass]="{'hidden': dropbelow == 'Artists'}" (click)="setdrop('Artists')">Artists</div>
+           <!--div [ngClass]="{'hidden': dropbelow == 'Albums'}" (click)="setdrop('Albums')">Albums</div>
+
+      <div [ngClass]="{'hidden': dropbelow == 'Playlists'}" (click)="setdrop('Playlists')">Playlists</div-->
       <div [ngClass]="{'hidden': dropbelow == 'People'}" (click)="setdrop('People')">People</div>
     </div>
   </div>
@@ -38,7 +39,7 @@
   <div class="somepeople line" *ngIf="peopleRes.length">
     <div class="somePeopleList smallList">
 
-      <a class="people square" (click)="addFriend(guy.id)" *ngFor="let guy of peopleRes | filterPeople: filterstr">
+      <a class="people square" (click)="addFriend(guy)" *ngFor="let guy of peopleRes | filterPeople: filterstr">
         <div class="plus">+</div>
         <div class="img" [style.backgroundImage]="'url('+ guy.pic +')'">
           <div class="subtitle">{{guy.username}}</div>
@@ -52,14 +53,16 @@
 
     <div class="someTracksList smallList">
       <div class="track" *ngFor="let track of tracksRes">
-        <div class="play" (click)="listen(track.link)">></div>
+        <div class="play" (click)="listen(track.id)">></div>
         <div class="rest">
           <div class="songTitle">{{track.title}}</div>
           <div class="time">{{track.duration * 1000 | date:'m:ss' }}</div>
           <div class="songInfo">{{track.artist.name}} - {{ track.album.title }}</div>
         </div>
-        <div class="addSong" (click)="addSong(track.id)" *ngIf="isSubpar === true">+</div>
+        <div class="addSong" (click)="addSong(track)" *ngIf="isSubpar === true">+</div>
       </div>
     </div>
   </div>
+
+  <h4 *ngIf="(!eventsRes.length && !playlistsRes.length && !peopleRes.length && !tracksRes.length)">no results</h4>
 </div>

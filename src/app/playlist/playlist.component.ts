@@ -7,7 +7,7 @@ import {  UsersService } from '../users/users.service';
 import {  User } from '../users/user';
 import {  Playlist } from './playlist';
 import { DataService } from "../data.service";
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ViewEncapsulation } from '@angular/core';
 import {createElement} from "@angular/core/src/view/element";
 
@@ -22,6 +22,8 @@ import {createElement} from "@angular/core/src/view/element";
 export class PlaylistComponent implements OnInit {
 
   @Output() changeListen = new EventEmitter<string>();
+  @Output() colorEvent = new EventEmitter<number>();
+  @Output() errorEvent = new EventEmitter<string>();
 
   tab = 1;
 
@@ -46,17 +48,18 @@ export class PlaylistComponent implements OnInit {
 
 
   public addTrack(e) {
-    console.log("addtrack", e);
-    this.playlistService.addTrack(this.playlist.id, e).subscribe(val => {
-      console.log(e);
-
+    this.playlistService.addTrack(this.playlist.id, e.id).subscribe(val => {
+      this.tracks.push(e);
+    }, err => {
+      this.errorEvent.emit('Error while adding a track');
     });
   }
 
   public addContributor(e) {
-    this.playlistService.addContributor(this.playlist.id, e).subscribe(val => {
-      console.log(val);
-
+    this.playlistService.addContributor(this.playlist.id, e.id).subscribe(val => {
+      this.contributors.push(e);
+    }, err => {
+      this.errorEvent.emit('Error while adding a contributor');
     });
   }
 
@@ -68,6 +71,8 @@ export class PlaylistComponent implements OnInit {
           this.contributors.splice(ids, 1);
         }
       });
+    }, err => {
+      this.errorEvent.emit('Error while removing a contributor');
     });
   }
 
@@ -80,6 +85,8 @@ export class PlaylistComponent implements OnInit {
           this.tracks.splice(ids, 1);
         }
       });
+    }, err => {
+      this.errorEvent.emit('Error while deleting a track from the playlist');
     });
   }
 
@@ -92,6 +99,8 @@ export class PlaylistComponent implements OnInit {
         const tmp2 = this.tracks[id + 1];
         this.tracks[id] = tmp2;
         this.tracks[id + 1] = tmp;
+      }, err => {
+        this.errorEvent.emit('Error while moving this track down');
       });
     }
   }
@@ -104,6 +113,8 @@ export class PlaylistComponent implements OnInit {
         const tmp2 = this.tracks[id - 1];
         this.tracks[id] = tmp2;
         this.tracks[id - 1] = tmp;
+      }, err => {
+        this.errorEvent.emit('Error while moving this track up');
       });
     }
   }
@@ -142,6 +153,8 @@ export class PlaylistComponent implements OnInit {
 
   ngOnInit() {
     this.getPlaylist();
-
+    setTimeout(() => {
+      this.colorEvent.emit(2);
+      },100);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import {  AuthenticationService } from '../authentication/authentication.service';
 import { YourMusicService } from './yourMusic.service';
@@ -17,6 +17,7 @@ export class YourMusicComponent implements OnInit {
 
 
   @Output() errorEvent = new EventEmitter<string>();
+  @Output() colorEvent = new EventEmitter<number>();
   playlists: any;
   friends: any[] = [];
   tab = 1;
@@ -39,10 +40,14 @@ export class YourMusicComponent implements OnInit {
 
     this.yourMusicService.getPlaylists().subscribe(val => {
       this.playlists = val;
+    }, err => {
+      this.errorEvent.emit('Unknown error while loading playlists');
     });
     this.yourMusicService.getFriends().subscribe(val => {
       this.friends = val;
-    });
+      }, err => {
+        this.errorEvent.emit('Unknown error while loading friends');
+      });
   }
 
   private resetModal() {
@@ -60,7 +65,7 @@ export class YourMusicComponent implements OnInit {
         if (err.error && err.error.result) {
           this.errorEvent.emit(err.error.result);
         } else {
-          this.errorEvent.emit("Unknown error in login");
+          this.errorEvent.emit("Unknown error when creating playlist");
         }
       });
     } else if (this.modalType === 'event') {
@@ -71,7 +76,7 @@ export class YourMusicComponent implements OnInit {
         if (err.error && err.error.result) {
           this.errorEvent.emit(err.error.result);
         } else {
-          this.errorEvent.emit("Unknown error in login");
+          this.errorEvent.emit("Unknown error when creating event");
         }
     });
     }
@@ -87,7 +92,7 @@ export class YourMusicComponent implements OnInit {
         }
       });
     }, error => {
-      this.errorEvent.emit(`Unknow error while removing friend ${id}`);
+      this.errorEvent.emit(`Unknow error while removing friend`);
       });
   }
 
@@ -113,6 +118,7 @@ export class YourMusicComponent implements OnInit {
 
   public selectTab(nbr) {
     this.tab = -1;
+    this.colorEvent.emit(nbr);
     setTimeout(() => {this.tab = nbr; }, 100);
   }
 

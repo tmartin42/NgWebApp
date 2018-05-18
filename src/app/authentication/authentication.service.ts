@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AuthService } from 'ngx-auth';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
@@ -50,7 +50,7 @@ export class AuthenticationService implements AuthService {
    * can execute pending requests or retry original one
    * @returns {Observable<any>}
    */
-  public refreshToken(): Observable < AccessData > {
+  public refreshToken(): Observable < any > {
     return this.tokenStorage
       .getRefreshToken()
       .switchMap((refreshToken: string) => {
@@ -91,13 +91,13 @@ export class AuthenticationService implements AuthService {
 
 
   public login(username, password): Observable<any> {
-    return this.http.post(`http://localhost:3000/user/login`, {username: username, password: password}  )
+    return this.http.post(`http://localhost:3000/user/login`, {username: username, password: password}, {responseType: 'text'}  )
       .do((tokens: string) => this.saveAccessData(tokens));
   }
 
   public signup(username, email, password): Observable<any> {
     console.log("signup");
-    return this.http.post(`http://localhost:3000/user/signup`, {username: username, mail: email, password: password}  )
+    return this.http.post(`http://localhost:3000/user/signup`, {username: username, mail: email, password: password} , {responseType: 'text'} )
       .do((tokens: string) => this.saveAccessData(tokens));
   }
   /**

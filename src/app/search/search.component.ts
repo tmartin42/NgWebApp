@@ -17,9 +17,10 @@ export class SearchComponent implements OnInit {
 
   @Input() cust;
   @Input() isSubpar;
-  @Output() changeListen = new EventEmitter<string>();
-  @Output() addedTrack = new EventEmitter<number>();
-  @Output() addContributor = new EventEmitter<number>();
+  @Output() changeListen = new EventEmitter<number>();
+  @Output() addedTrack = new EventEmitter<any>();
+  @Output() addContributor = new EventEmitter<any>();
+  @Output() errorEvent = new EventEmitter<string>();
 
   searchword = '';
   drop = 'Tracks';
@@ -70,54 +71,64 @@ export class SearchComponent implements OnInit {
     this.peopleRes = [];
   }
 
-  public addFriend(id) {
+  public addFriend(cont) {
     if (!this.isSubpar) {
-      this.usersService.addFriend(id).subscribe(val => {console.log(val); });
+      this.usersService.addFriend(cont.id).subscribe(val => {} , err => {
+        this.errorEvent.emit('Error while adding a friend');
+      });
     } else {
-      this.addContributor.emit(id);
+      this.addContributor.emit(cont);
     }
   }
 
-  public listen(url) {
-    console.log('listen');
-    this.changeListen.emit(url);
+  public listen(id) {
+    this.changeListen.emit(id);
   }
-  public addSong(id) {
-    console.log('listen2 ', id);
-    this.addedTrack.emit(id);
+  public addSong(cont) {
+    this.addedTrack.emit(cont);
   }
 
   public search(e) {
-    if ((e.keyCode === 13 || e === 13 ) && this.searchword !== '' && this.drop !== '') {
-      this.filterstr = this.searchword;
-      if (this.drop === 'Tracks' || this.drop === 'Artists' || this.drop === 'Albums') {
-        this.searchService.searchDeezer(this.searchword, '/' + this.drop.substring(0, this.drop.length - 1).toLowerCase()).subscribe(val => {
-          this.resetArrays();
-          val.data.forEach((key) => {
-            if (key.type === 'track') {
-              this.tracksRes.push(key);
-            } else if (key.type === 'album') {
-              this.albumsRes.push(key);
-            } else if (key.type === 'artist') {
-              this.artistsRes.push(key);
-            }
+    if ((e.keyCode === 13 || e === 13 )) {
+      this.resetArrays();
+      if (this.searchword !== '' && this.drop !== '') {
+        this.filterstr = this.searchword;
+        if (this.drop === 'Tracks' || this.drop === 'Artists' || this.drop === 'Albums') {
+          this.searchService.searchDeezer(this.searchword, '/' + this.drop.substring(0, this.drop.length - 1).toLowerCase()).subscribe(val => {
+            val.data.forEach((key) => {
+              if (key.type === 'track') {
+                this.tracksRes.push(key);
+              } else if (key.type === 'album') {
+                this.albumsRes.push(key);
+              } else if (key.type === 'artist') {
+                this.artistsRes.push(key);
+              }
+            });
+          }, err => {
+            this.errorEvent.emit('Error with deezer API');
           });
-        });
-      } else if (this.drop === 'People') {
-        this.resetArrays();
-        this.searchService.searchPeople().subscribe(val => {
-          this.peopleRes = val;
-        });
-      } else if (this.drop === 'Playlists') {
-        this.resetArrays();
-        this.searchService.searchPlaylists().subscribe(val => {
-          this.playlistsRes = val;
-        });
-      } else if (this.drop === 'Events') {
-        this.resetArrays();
-        this.searchService.searchEvents().subscribe(val => {
-          this.eventsRes = val;
-        });
+        } else if (this.drop === 'People') {
+
+          this.searchService.searchPeople().subscribe(val => {
+            this.peopleRes = val;
+          }, err => {
+            this.errorEvent.emit('Error while searching people ');
+          });
+        } else if (this.drop === 'Playlists') {
+
+          this.searchService.searchPlaylists().subscribe(val => {
+            this.playlistsRes = val;
+          }, err => {
+            this.errorEvent.emit('Error while searching playlist');
+          });
+        } else if (this.drop === 'Events') {
+
+          this.searchService.searchEvents().subscribe(val => {
+            this.eventsRes = val;
+          }, err => {
+            this.errorEvent.emit('Error while searching events');
+          });
+        }
       }
     }
   }

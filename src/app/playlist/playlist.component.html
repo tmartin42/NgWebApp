@@ -1,3 +1,4 @@
+
 <div class="playlistInfos" *ngIf="playlist">
   <div class="playlistInfosWrapper">
     <h1>{{ playlist.title }}</h1>
@@ -33,7 +34,7 @@
 
   </div>
   <div class="tab" [ngClass]="{'active': tab == 2}">
-    <div class="somePeopleList smallList">
+    <div class="somePlaylistsList smallList">
 
       <a class="people square" *ngFor="let Contributor of contributors"  (click)="removeContributor(Contributor.id)">
         <div class="minus">-</div>

@@ -61,7 +61,7 @@ h1 span {
 }
 
 .doubletab-child {
-  height: 311px;
+  height: 370px;
   overflow: hidden;
   width: 200%;
   position: relative;
@@ -79,10 +79,6 @@ h1 span {
   display: inline-block;
   position: relative;
   vertical-align: top;
-}
-
-.tab1 {
-
 }
 
 label {
@@ -124,7 +120,7 @@ button {
 }
 
 .tab1 {
-  padding: 52px 40px 35px;
+  padding: 80px 40px 35px;
 }
 
 .loginFGD {

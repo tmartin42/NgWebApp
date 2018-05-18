@@ -24,6 +24,7 @@
   background: #00000042;
   padding-top: 20px;
   min-height: calc(100% - 168px);
+
 }
 
 h2 {
@@ -137,7 +138,7 @@ h2 {
 }
 
 .dropdown:not(.closed):hover .rollout {
-  height: 200px;
+  height: 125px;
 }
 
 .dropdown .rollout div {
@@ -264,3 +265,9 @@ h2 {
   background: #b3b3b3;
   cursor: pointer;
 }
+h4 {
+  font-size: 28px;
+  color: white;
+  margin-top: 90px;
+}
+

@@ -1,6 +1,6 @@
 import { Component, Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Jsonp } from '@angular/http';
 
 @Injectable()

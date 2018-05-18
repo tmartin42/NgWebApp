@@ -41,6 +41,16 @@ h2 {
   box-shadow: 0px -120px 110px -60px #000000ed inset;
 }
 
+.somePlaylistsList .img {
+  background: linear-gradient(45deg, #8f9070 0%,#0c2328 100%);
+}
+.someEventsList .img {
+  background: linear-gradient(45deg, #382126 0%,#0c2328 100%);
+}
+.somePeopleList .img {
+  background: linear-gradient(45deg, #7482ab 0%,#0c2328 100%);
+}
+
 .subtitle {
   color: #ececec;
   vertical-align: bottom;
@@ -80,7 +90,7 @@ h2 {
   font-size: 25px;
   padding: 0px 40px;
   cursor: pointer;
-  top: 85px;
+  top: 75px;
 }
 
 

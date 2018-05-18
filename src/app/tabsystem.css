@@ -39,7 +39,6 @@
   height: 0;
   overflow: hidden;
   padding: 0px;
-  transition: opacity 0.2s, height 0s 0.2s, padding 0s 0.2s;
 }
 
 .tab.active {
@@ -48,5 +47,10 @@
   min-height: 100%;
   padding-top: 20px;
   padding-bottom: 10px;
-  transition: opacity 0.2s;
+}
+
+h4 {
+  font-size: 28px;
+  color: white;
+  margin-top: 90px;
 }
