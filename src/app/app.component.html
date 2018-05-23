@@ -24,6 +24,9 @@
 </div>
 <div class="bottomPlayer" *ngIf="isAuth">
 
-  <iframe [src]="src" *ngIf="src" class="player"></iframe>
+  <div id="player"></div>
+  <!--iframe [src]="src" *ngIf="src" class="player"></iframe-->
   <!--div  [innerHTML]="embed | sanitizeHtml" (DOMSubtreeModified)="test($event)"></div-->
 </div>
+
+

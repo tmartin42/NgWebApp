@@ -8,6 +8,9 @@ import { ErrorService } from "./error.service";
 import {Observable} from "rxjs/Observable";
 import {DomSanitizer} from "@angular/platform-browser";
 
+declare var DZ: any;
+declare var $: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,7 +23,7 @@ export class AppComponent implements OnInit {
   embed;
   color = 1;
   src;
-
+  loadAPI: Promise<any>;
   subscription: any;
 
   public logout() {
@@ -119,9 +122,69 @@ export class AppComponent implements OnInit {
     }*/
   }
 
+
+
+
+
+  public loadScript() {
+    var isFound = false;
+    var scripts = document.getElementsByTagName("script")
+    for (var i = 0; i < scripts.length; ++i) {
+      if (scripts[i].getAttribute('src') != null && scripts[i].getAttribute('src').includes("loader")) {
+        isFound = true;
+      }
+    }
+
+    if (!isFound) {
+      var dynamicScripts = ["https://e-cdns-files.dzcdn.net/js/min/dz.js"];
+
+      for (var i = 0; i < dynamicScripts .length; i++) {
+        let node = document.createElement('script');
+        node.src = dynamicScripts [i];
+        node.type = 'text/javascript';
+        node.async = false;
+        node.charset = 'utf-8';
+        document.getElementsByTagName('head')[0].appendChild(node);
+      }
+
+    }
+  }
+
+
   ngOnInit() {
     this.getAuth();
 
+    function event_listener_append(e) {
+      for (var i = 0; i < arguments.length; i++) {
+        console.log(arguments[i]);
+      }
+    }
+    function onPlayerLoaded() {
+      $("#controlers input").attr('disabled', false);
+      event_listener_append('player_loaded');
+      DZ.Event.subscribe('current_track', function(arg){
+        event_listener_append('current_track', arg.index, arg.track.title, arg.track.album.title);
+      });
+      DZ.Event.subscribe('player_position', function(arg){
+        event_listener_append('position', arg[0], arg[1]);
+        $("#slider_seek").find('.bar').css('width', (100*arg[0]/arg[1]) + '%');
+      });
+    }
+
+
+    setTimeout(() => {
+      DZ.init({
+        appId: '8',
+        channelUrl: 'https://developers.deezer.com/examples/channel.php',
+        player: {
+          container: 'player',
+          playlist: true,
+          width: 650,
+          height: 300,
+          onload: onPlayerLoaded
+        }
+      });
+    }, 100);
     /*extract('https://api.deezer.com/oembed?url=http://www.deezer.com/track/3135556').then((error, result) => {
       if (error) {
         console.error(error);
