@@ -22,6 +22,7 @@ import {createElement} from "@angular/core/src/view/element";
 export class PlaylistComponent implements OnInit {
 
   @Output() changeListen = new EventEmitter<string>();
+  @Output() listenPlaylist = new EventEmitter<any>();
   @Output() colorEvent = new EventEmitter<number>();
   @Output() errorEvent = new EventEmitter<string>();
 
@@ -88,6 +89,11 @@ export class PlaylistComponent implements OnInit {
     }, err => {
       this.errorEvent.emit('Error while deleting a track from the playlist');
     });
+  }
+
+  public playIt(id) {
+    console.log({tracks: this.playlist.tracks, id: id})
+    this.listenPlaylist.emit({tracks: this.playlist.tracks, id: id});
   }
 
   moveBot(tid, id) {

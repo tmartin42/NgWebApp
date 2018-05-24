@@ -75,6 +75,11 @@ h2 {
   width: 100%;
 }
 
+.song:hover {
+  background: #0000001f;
+}
+
+
 .song.moving * {
   z-index: 11;
 }
@@ -88,13 +93,40 @@ h2 {
   display: inline-block;
   text-align: center;
   vertical-align: top;
+  margin: 0px 10px 0px 5px;
   color: white;
+}
+
+.song:hover .nbr {
+  height: 50px;
+  width: 50px;
+  line-height: 52px;
+  font-size: 20px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  color: #b3b3b3;
+  border: 1px solid #b3b3b3;
+  margin: 0px 10px 0px 5px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0px;
+}
+
+.song:hover .nbr:after{
+  content: '>';
+  height: 50px;
+  width: 50px;
+  line-height: 52px;
+  font-size: 20px;
+  color: #b3b3b3;
 }
 
 .rest {
   position: relative;
   display: inline-block;
-  width: calc(100% - 170px);
+  width: calc(100% - 190px);
 }
 
 
@@ -242,4 +274,13 @@ h2 {
 
 .square:hover .minus {
   opacity: 1;
+}
+
+.playIt {
+
+  font-size: 36px;
+  color: white;
+  background: #0000009c;
+  line-height: 130px;
+  cursor: pointer;
 }

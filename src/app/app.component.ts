@@ -7,6 +7,7 @@ import { DataService } from './data.service';
 import { ErrorService } from "./error.service";
 import {Observable} from "rxjs/Observable";
 import {DomSanitizer} from "@angular/platform-browser";
+import {PlaylistService} from "./playlist/playlist.service";
 
 declare var DZ: any;
 declare var $: any;
@@ -26,6 +27,11 @@ export class AppComponent implements OnInit {
   loadAPI: Promise<any>;
   subscription: any;
   lol = false;
+  changePos = true;
+  duration;
+  playing = false;
+
+  curt = null;
 
   public logout() {
     this.authService.logout();
@@ -56,34 +62,54 @@ export class AppComponent implements OnInit {
 
   getAuth(): void {
 
+    var dis = this;
+
+    function testit(arg) {
+      console.log('test ', arg);
+      DZ.player.seek(50);
+    };
+
     function onPlayerLoaded() {
       $("#controlers input").attr('disabled', false);
       console.log('player_loaded');
 
-      let duration = localStorage.getItem('duration');
+      dis.duration = localStorage.getItem('duration');
       let id = localStorage.getItem('trackID');
+      let playlist = localStorage.getItem('playlistID');
+      let pi = localStorage.getItem('pi');
       setTimeout(()=>{console.log(id)}, 200);
-      console.log(id, duration);
-
+      console.log(id, dis.duration);
 
       if (id !== null) {
-        if (duration !== null) {
-          console.log('here');
-          DZ.player.playTracks([925108, 87757545, 421491162], 2, duration);
-        } else {
-          DZ.player.playTracks([id]);
+        if (dis.duration === null) {
+          this.changePos = false;
         }
+        DZ.player.playTracks([id], false);
+      } else {
+        console.log('changepsoqdqwd')
+        this.changePos = false;
       }
+      DZ.Event.subscribe('player_buffering', function(arg) {
+        console.log("buffering: ", arg);
+      })
 
       DZ.Event.subscribe('current_track', function (arg) {
         console.log('current_track', arg);
-        localStorage.setItem('trackID', arg.track.id);
       });
       DZ.Event.subscribe('player_position', function (arg) {
-        console.log('position', arg[0], arg[1]);
-        $("#slider_seek").find('.bar').css('width', (100 * arg[0] / arg[1]) + '%');
-          localStorage.setItem('duration', arg[0]);
+     //   console.log('position', arg[0], arg[1]);
+     //   $("#slider_seek").find('.bar').css('width', (100 * arg[0] / arg[1]) + '%');
+     //     localStorage.setItem('duration', (100 * arg[0] / arg[1]).toString());
       });
+      DZ.Event.subscribe('player_play', (arg) => {
+    /*    console.log('seekp', dis);
+        if (dis.changePos === true) {
+          console.log('seek');
+          dis.changePos = false;
+          if (dis.duration < 95)
+            DZ.player.seek(dis.duration);
+        }*/
+      })
     }
 
     this.authService.isAuthorized().subscribe(token => {
@@ -115,7 +141,8 @@ export class AppComponent implements OnInit {
     private jsonp: Jsonp,
     private dataService: DataService,
     public errorService: ErrorService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private playlistService: PlaylistService
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -136,13 +163,22 @@ export class AppComponent implements OnInit {
       e.changeListen.subscribe(val => {
         console.log(val);
     //    this.src = this.sanitizer.bypassSecurityTrustResourceUrl(`http://www.deezer.com/plugins/player?type=tracks&id=${val}&autoplay=true`);
-        DZ.player.addToQueue([val]);
-        setTimeout(()=>{
-          DZ.player.play();
-          },100);
+        DZ.player.playTracks([val]);
+
+        localStorage.setItem('trackID', val);
+        localStorage.setItem('playlistID', null);
+
       /*  this.fetchoembed(val).subscribe(res => {
           this.embed = res.html;
         });*/
+      });
+    }
+    if (e.listenPlaylist) {
+      e.listenPlaylist.subscribe(val => {
+
+        console.log(val.id);
+        DZ.player.playTracks(val.tracks, val.id);
+
       });
     }
     if (e.errorEvent) {

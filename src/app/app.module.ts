@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { SanitizeHtml } from './pipe';
 import { DataService } from "./data.service";
 import { ErrorService } from "./error.service";
+import {PlaylistService} from "./playlist/playlist.service";
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ErrorService } from "./error.service";
   ],
   providers: [
     DataService,
-    ErrorService
+    ErrorService,
+    PlaylistService
   ],
   declarations: [
     AppComponent,
