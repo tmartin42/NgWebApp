@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   src;
   loadAPI: Promise<any>;
   subscription: any;
+  lol = false;
 
   public logout() {
     this.authService.logout();
@@ -54,7 +55,58 @@ export class AppComponent implements OnInit {
   }*/
 
   getAuth(): void {
-    this.authService.isAuthorized().subscribe(token => this.isAuth = token);
+
+    function onPlayerLoaded() {
+      $("#controlers input").attr('disabled', false);
+      console.log('player_loaded');
+
+      let duration = localStorage.getItem('duration');
+      let id = localStorage.getItem('trackID');
+      setTimeout(()=>{console.log(id)}, 200);
+      console.log(id, duration);
+
+
+      if (id !== null) {
+        if (duration !== null) {
+          console.log('here');
+          DZ.player.playTracks([925108, 87757545, 421491162], 2, duration);
+        } else {
+          DZ.player.playTracks([id]);
+        }
+      }
+
+      DZ.Event.subscribe('current_track', function (arg) {
+        console.log('current_track', arg);
+        localStorage.setItem('trackID', arg.track.id);
+      });
+      DZ.Event.subscribe('player_position', function (arg) {
+        console.log('position', arg[0], arg[1]);
+        $("#slider_seek").find('.bar').css('width', (100 * arg[0] / arg[1]) + '%');
+          localStorage.setItem('duration', arg[0]);
+      });
+    }
+
+    this.authService.isAuthorized().subscribe(token => {
+      this.isAuth = token;
+    console.log('token: ', token);
+
+    if (token !== false && this.lol === false) {
+
+      this.lol = true;
+      setTimeout(() => {
+        DZ.init({
+          appId: '8',
+          channelUrl: 'https://developers.deezer.com/examples/channel.php',
+          player: {
+            container: 'player',
+            playlist: false,
+            onload: onPlayerLoaded
+          }
+        });
+      }, 100);
+    }
+    });
+
   }
 
   constructor(
@@ -83,8 +135,11 @@ export class AppComponent implements OnInit {
     if (e.changeListen) {
       e.changeListen.subscribe(val => {
         console.log(val);
-        this.src = this.sanitizer.bypassSecurityTrustResourceUrl(`http://www.deezer.com/plugins/player?type=tracks&id=${val}&autoplay=true`);
-
+    //    this.src = this.sanitizer.bypassSecurityTrustResourceUrl(`http://www.deezer.com/plugins/player?type=tracks&id=${val}&autoplay=true`);
+        DZ.player.addToQueue([val]);
+        setTimeout(()=>{
+          DZ.player.play();
+          },100);
       /*  this.fetchoembed(val).subscribe(res => {
           this.embed = res.html;
         });*/
@@ -154,37 +209,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.getAuth();
 
-    function event_listener_append(e) {
-      for (var i = 0; i < arguments.length; i++) {
-        console.log(arguments[i]);
-      }
-    }
-    function onPlayerLoaded() {
-      $("#controlers input").attr('disabled', false);
-      event_listener_append('player_loaded');
-      DZ.Event.subscribe('current_track', function(arg){
-        event_listener_append('current_track', arg.index, arg.track.title, arg.track.album.title);
-      });
-      DZ.Event.subscribe('player_position', function(arg){
-        event_listener_append('position', arg[0], arg[1]);
-        $("#slider_seek").find('.bar').css('width', (100*arg[0]/arg[1]) + '%');
-      });
-    }
 
 
-    setTimeout(() => {
-      DZ.init({
-        appId: '8',
-        channelUrl: 'https://developers.deezer.com/examples/channel.php',
-        player: {
-          container: 'player',
-          playlist: true,
-          width: 650,
-          height: 300,
-          onload: onPlayerLoaded
-        }
-      });
-    }, 100);
     /*extract('https://api.deezer.com/oembed?url=http://www.deezer.com/track/3135556').then((error, result) => {
       if (error) {
         console.error(error);

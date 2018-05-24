@@ -315,7 +315,7 @@
     <div class="someplaylists line">
       <h2>Playlists you might like</h2>
       <div class="somePlaylistsList list">
-          <a class="event square" *ngFor="let user of users$ | async" href="/playlist/{{user.id}}">
+          <a class="event square" *ngFor="let user of users$ | async" routerLink="/playlist/{{user.id}}">
             <div class="img">
               <div class="subtitle">
             {{ user.title }}
