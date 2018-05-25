@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {RouteConfigLoadEnd, Router, NavigationEnd} from '@angular/router';
+import {RouteConfigLoadEnd, Router, NavigationEnd, ActivatedRoute} from '@angular/router';
 import {  AuthenticationService } from './authentication/authentication.service';
 import { extract } from 'oembed-parser';
 import { Jsonp } from '@angular/http';
@@ -30,8 +30,27 @@ export class AppComponent implements OnInit {
   changePos = true;
   duration;
   playing = false;
+  currTrack = null;
 
   curt = null;
+
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthenticationService,
+    private jsonp: Jsonp,
+    private dataService: DataService,
+    public errorService: ErrorService,
+    public sanitizer: DomSanitizer,
+    private playlistService: PlaylistService
+  ) {
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.getAuth();
+      }
+    });
+  }
 
   public logout() {
     this.authService.logout();
@@ -74,13 +93,21 @@ export class AppComponent implements OnInit {
       console.log('player_loaded');
 
       dis.duration = localStorage.getItem('duration');
-      let id = localStorage.getItem('trackID');
-      let playlist = localStorage.getItem('playlistID');
-      let pi = localStorage.getItem('pi');
-      setTimeout(()=>{console.log(id)}, 200);
-      console.log(id, dis.duration);
+      const id = localStorage.getItem('trackID');
+      const playlistStr = localStorage.getItem('playlist');
+      if (playlistStr != null) {
+        const playlist = JSON.parse(playlistStr);
+        console.log(playlist);
+        const pi = localStorage.getItem('pi');
+        console.log("pi: ",pi);
 
-      if (id !== null) {
+        if (dis.duration === null) {
+          this.changePos = false;
+        }
+        console.log(playlist.tracks, false, pi);
+        DZ.player.playTracks(playlist.tracks, false, Number(pi));
+      }
+      else if (id !== null) {
         if (dis.duration === null) {
           this.changePos = false;
         }
@@ -95,21 +122,25 @@ export class AppComponent implements OnInit {
 
       DZ.Event.subscribe('current_track', function (arg) {
         console.log('current_track', arg);
+        localStorage.setItem('pi', arg.index.toString());
+
+        $('.playing').removeClass('playing');
+      //  console.log('.song[trackid:"'+ arg.track.id +'"]');
+       $('.song[trackid="' + arg.track.id + '"]').addClass('playing');
+
       });
       DZ.Event.subscribe('player_position', function (arg) {
      //   console.log('position', arg[0], arg[1]);
      //   $("#slider_seek").find('.bar').css('width', (100 * arg[0] / arg[1]) + '%');
-     //     localStorage.setItem('duration', (100 * arg[0] / arg[1]).toString());
+          localStorage.setItem('duration', (100 * arg[0] / arg[1]).toString());
       });
       DZ.Event.subscribe('player_play', (arg) => {
-    /*    console.log('seekp', dis);
         if (dis.changePos === true) {
-          console.log('seek');
           dis.changePos = false;
           if (dis.duration < 95)
             DZ.player.seek(dis.duration);
-        }*/
-      })
+        }
+      });
     }
 
     this.authService.isAuthorized().subscribe(token => {
@@ -135,21 +166,6 @@ export class AppComponent implements OnInit {
 
   }
 
-  constructor(
-    private router: Router,
-    private authService: AuthenticationService,
-    private jsonp: Jsonp,
-    private dataService: DataService,
-    public errorService: ErrorService,
-    public sanitizer: DomSanitizer,
-    private playlistService: PlaylistService
-  ) {
-    router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.getAuth();
-      }
-    });
-  }
 
   changeListener(url) {
     console.log(url);
@@ -166,7 +182,7 @@ export class AppComponent implements OnInit {
         DZ.player.playTracks([val]);
 
         localStorage.setItem('trackID', val);
-        localStorage.setItem('playlistID', null);
+        localStorage.setItem('playlist', null);
 
       /*  this.fetchoembed(val).subscribe(res => {
           this.embed = res.html;
@@ -178,6 +194,8 @@ export class AppComponent implements OnInit {
 
         console.log(val.id);
         DZ.player.playTracks(val.tracks, val.id);
+        localStorage.setItem('playlist', JSON.stringify(val));
+        localStorage.setItem('pi', val.id.toString());
 
       });
     }

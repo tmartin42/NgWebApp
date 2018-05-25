@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import {  AuthenticationService } from '../authentication/authentication.service';
@@ -21,6 +21,7 @@ import {createElement} from "@angular/core/src/view/element";
 
 export class PlaylistComponent implements OnInit {
 
+  @Input() currTrack;
   @Output() changeListen = new EventEmitter<string>();
   @Output() listenPlaylist = new EventEmitter<any>();
   @Output() colorEvent = new EventEmitter<number>();
