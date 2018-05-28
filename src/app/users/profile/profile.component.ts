@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
 import {  AuthenticationService } from '../../authentication/authentication.service';
@@ -9,13 +9,10 @@ import {  UsersService } from '../users.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
-  profile = '';
-  drop = 'All';
-  dropbelow = 'All';
+  me;
   tab = 1;
-  close = false;
 
   constructor(
     private router: Router,
@@ -23,18 +20,11 @@ export class ProfileComponent {
     private usersService: UsersService
   ) { }
 
-  public selectTab(nbr) {
-    this.tab = -1;
-    setTimeout(() => {this.tab = nbr; }, 200);
-  }
 
-  public  setdrop(str) {
-    this.close = true;
-    this.drop = str;
-    setTimeout(() => {
-      this.close = false;
-      this.dropbelow = str;
-    }, 300);
+
+
+  ngOnInit() {
+    this.usersService.getMe().subscribe(me => {this.me = me; console.log(me)});
   }
 
 }

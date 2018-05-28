@@ -52,6 +52,8 @@ export class PlaylistComponent implements OnInit {
   public addTrack(e) {
     this.playlistService.addTrack(this.playlist.id, e.id).subscribe(val => {
       this.tracks.push(e);
+      this.playlist.tracks.push(e.id);
+      console.log("tracks ???? ", this.playlist.tracks);
     }, err => {
       this.errorEvent.emit('Error while adding a track');
     });
@@ -93,7 +95,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   public playIt(id) {
-    console.log({tracks: this.playlist.tracks, id: id, title: this.playlist.title})
+    console.log({tracks: this.playlist.tracks, index: id, title: this.playlist.title, id: this.playlist.id})
     this.listenPlaylist.emit({tracks: this.playlist.tracks, index: id, title: this.playlist.title, id: this.playlist.id});
   }
 

@@ -24,7 +24,7 @@
   <div class="tab" [ngClass]="{'active': tab == 1}">
     <div class="songList smallList" *ngIf="playlist">
           <div *ngFor="let track of tracks; let i = index">
-            <div class="song"  attr.trackId="{{track.id}}">
+            <div class="song" *ngIf="track"  attr.trackId="{{track.id}}">
             <div class="nbr" *ngIf="track" (click)="playIt(i)">{{i + 1}}</div>
             <div class="rest" *ngIf="track">
               <div class="songTitle">{{track.title}}</div>

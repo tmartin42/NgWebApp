@@ -284,3 +284,28 @@ h2 {
   line-height: 130px;
   cursor: pointer;
 }
+
+.song.playing {
+  background: #ececec85;
+}
+
+.song.playing div {
+  color: black;
+}
+
+.song.playing .nbr {
+  font-size: 0;
+}
+
+.song.playing .nbr:after{
+  content: '>';
+  height: 50px;
+  width: 50px;
+  line-height: 52px;
+  font-size: 35px;
+}
+
+.song.playing .removeSong {
+  background: #a52a2a00;
+  border: 1px solid black;
+}

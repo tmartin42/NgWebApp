@@ -22,4 +22,8 @@ export class UsersService {
   removeFriend(id) {
     return this.http.delete(`http://localhost:3000/friends/${id}`, {});
   }
+
+  getMe() {
+    return this.http.get('http://localhost:3000/user/me');
+  }
 }

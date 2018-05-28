@@ -2,8 +2,8 @@
 <h1>Edit Profile</h1>
 
 <div class="img">
-  <img />
-  <input [(ngModel)]="img" type="file"/>
+  <img *ngIf="me && me.pic" [src]="me.pic"/>
+  <input [(ngModel)]="img" type="file" (change)="imgChange($event)"/>
 </div>
 <div class="inputwrap">
   <label> Change username:
