@@ -6,6 +6,8 @@
 
   <a class="leftLink" routerLink="/discover">Discover</a>
   <div class="leftSep"></div>
+  <a class="leftLink currPlaylist" *ngIf="playlist" routerLink="/playlist/{{playlist.id}}">Playing playlist<br/><span>{{playlist.title}}</span></a>
+
 
   <div class="bottom">
     <a class="yourname" (click)="logout()"><div class="profile">Logout</div></a>

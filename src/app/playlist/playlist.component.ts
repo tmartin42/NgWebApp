@@ -93,8 +93,8 @@ export class PlaylistComponent implements OnInit {
   }
 
   public playIt(id) {
-    console.log({tracks: this.playlist.tracks, id: id})
-    this.listenPlaylist.emit({tracks: this.playlist.tracks, id: id});
+    console.log({tracks: this.playlist.tracks, id: id, title: this.playlist.title})
+    this.listenPlaylist.emit({tracks: this.playlist.tracks, index: id, title: this.playlist.title, id: this.playlist.id});
   }
 
   moveBot(tid, id) {

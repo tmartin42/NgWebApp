@@ -23,7 +23,8 @@
 <div class="tabs">
   <div class="tab" [ngClass]="{'active': tab == 1}">
     <div class="songList smallList" *ngIf="playlist">
-          <div class="song" *ngFor="let track of tracks; let i = index" attr.trackId="{{track.id}}">
+          <div *ngFor="let track of tracks; let i = index">
+            <div class="song"  attr.trackId="{{track.id}}">
             <div class="nbr" *ngIf="track" (click)="playIt(i)">{{i + 1}}</div>
             <div class="rest" *ngIf="track">
               <div class="songTitle">{{track.title}}</div>
@@ -32,6 +33,7 @@
             </div>
             <div class="moveSong" *ngIf="track"><div  *ngIf="i === 0"></div><div (click)="moveTop(track.id, i)" *ngIf="i !== 0">▲</div><div (click)="moveBot(track.id, i)" *ngIf="i !== tracks.length - 1">▼</div><div  *ngIf="i === tracks.length - 1"></div></div>
             <div class="removeSong" (click)="removeTrack(track.id)" *ngIf="track">-</div>
+          </div>
           </div>
     </div>
 

@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   duration;
   playing = false;
   currTrack = null;
-
+  playlist: any;
   curt = null;
 
 
@@ -97,17 +97,16 @@ export class AppComponent implements OnInit {
       const playlistStr = localStorage.getItem('playlist');
       if (playlistStr != null) {
         const playlist = JSON.parse(playlistStr);
-        console.log(playlist);
+
+        console.log("dis:", playlist);
         const pi = localStorage.getItem('pi');
-        console.log("pi: ",pi);
 
         if (dis.duration === null) {
           this.changePos = false;
         }
-        console.log(playlist.tracks, false, pi);
         DZ.player.playTracks(playlist.tracks, false, Number(pi));
-      }
-      else if (id !== null) {
+        dis.setPlaylist(playlist);
+      } else if (id !== null) {
         if (dis.duration === null) {
           this.changePos = false;
         }
@@ -166,6 +165,10 @@ export class AppComponent implements OnInit {
 
   }
 
+  public setPlaylist(newVal) {
+    this.playlist = newVal;
+  }
+
 
   changeListener(url) {
     console.log(url);
@@ -193,10 +196,12 @@ export class AppComponent implements OnInit {
       e.listenPlaylist.subscribe(val => {
 
         console.log(val.id);
-        DZ.player.playTracks(val.tracks, val.id);
+        DZ.player.playTracks(val.tracks, val.index);
         localStorage.setItem('playlist', JSON.stringify(val));
-        localStorage.setItem('pi', val.id.toString());
+        localStorage.setItem('pi', val.index.toString());
 
+        this.playlist = val;
+        console.log("here: ", this.playlist);
       });
     }
     if (e.errorEvent) {
@@ -262,8 +267,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getAuth();
-
-
+   // console.log('timeout: ', this.playlist)
+    setTimeout(()=>{console.log('timeout: ', this.playlist)}, 2000);
 
     /*extract('https://api.deezer.com/oembed?url=http://www.deezer.com/track/3135556').then((error, result) => {
       if (error) {

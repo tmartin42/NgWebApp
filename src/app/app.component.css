@@ -63,6 +63,20 @@
   cursor: pointer;
 }
 
+.leftTab a.currPlaylist {
+  line-height: 30px;
+  height: 40px;
+  margin-top: 20px;
+  color: white;
+  text-align: center;
+  padding-left: 0;
+  width: 190px;
+}
+
+.leftTab a.currPlaylist span  {
+  color: grey;
+}
+
 .leftSep {
   width: calc(100% - 40px);
   margin: 10px 20px;
