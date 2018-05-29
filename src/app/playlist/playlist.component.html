@@ -57,5 +57,32 @@
     <app-search [cust]="custDrop" [isSubpar]="true" (addContributor)="addContributor($event)"  (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
   </div>
   <div class="tab" [ngClass]="{'active': tab == 5}">
+
+    <div class="inputwrap">
+      <label> Change playlist title
+      </label>
+      <input [(ngModel)]="newtitle" placeholder="Change title">
+      <button (click)="confirmChangeTitle()">
+        Confirm
+      </button>
+    </div>
+
+    <div class="inputwrap">
+      <label> Delete playlist
+      </label>
+      <input [(ngModel)]="confirmdelete" placeholder='write "delete it please" to confirm'>
+      <button (click)="confirmdeleteplaylist()">
+        Confirm
+      </button>
+    </div>
+
+    <div class="inputwrap" *ngIf="playlist">
+      <div class="radio">
+        <div class="switch" ngClass="{'left': playlist.isPublic}">
+        </div>
+        <div class="radioDesc" *ngIf="playlist.isPublic">public</div>
+        <div class="radioDesc" *ngIf="!playlist.isPublic">private</div>
+      </div>
+    </div>
   </div>
 </div>

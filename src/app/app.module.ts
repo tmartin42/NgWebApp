@@ -26,8 +26,7 @@ import {PlaylistService} from "./playlist/playlist.service";
     PlaylistService
   ],
   declarations: [
-    AppComponent,
-    SanitizeHtml
+    AppComponent
   ],
   bootstrap: [
     AppComponent

@@ -309,3 +309,57 @@ h2 {
   background: #a52a2a00;
   border: 1px solid black;
 }
+
+
+.inputwrap {
+
+  padding: 20px;
+  position: relative;
+  display: inline-block;
+  width: 500px;
+  border: 1px solid grey;
+  margin: 5px;
+}
+
+.inputwrap.deezer {
+  height: 328px;
+  vertical-align: top;
+}
+
+.inputwrap.deezer img {
+  margin-top: 45px;
+}
+
+
+label {
+  font-size: 20px;
+  color: white;
+  width: 100%;
+  display: block;
+  margin: 10px 0px 15px;
+}
+
+input {
+  height: 45px;
+  width: 420px;
+  margin: 5px 10px;
+  font-size: 16px;
+  outline: none;
+  position: relative;
+  padding: 0px 10px;
+}
+
+button {
+  width: 220px;
+  height: 50px;
+  border-radius: 0px;
+  -webkit-appearance: none;
+  border: none;
+  background-color: #ff3556;
+  font-size: 20px;
+  margin-top: 14px;
+  outline: none;
+  line-height: 52px;
+  color: white;
+  cursor: pointer;
+}

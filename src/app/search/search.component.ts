@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
   @Output() changeListen = new EventEmitter<number>();
   @Output() addedTrack = new EventEmitter<any>();
   @Output() addContributor = new EventEmitter<any>();
-  @Output() errorEvent = new EventEmitter<string>();
+  @Output() errorEvent = new EventEmitter<any>();
 
   searchword = '';
   drop = 'Tracks';
@@ -73,8 +73,11 @@ export class SearchComponent implements OnInit {
 
   public addFriend(cont) {
     if (!this.isSubpar) {
-      this.usersService.addFriend(cont.id).subscribe(val => {} , err => {
-        this.errorEvent.emit('Error while adding a friend');
+      this.usersService.addFriend(cont.id).subscribe(val => {
+
+        this.errorEvent.emit({msg: 'Friend added', notError: true});
+      } , err => {
+        this.errorEvent.emit({msg: 'Error while adding a friend'});
       });
     } else {
       this.addContributor.emit(cont);
@@ -105,28 +108,28 @@ export class SearchComponent implements OnInit {
               }
             });
           }, err => {
-            this.errorEvent.emit('Error with deezer API');
+            this.errorEvent.emit({msg: 'Error with deezer API'});
           });
         } else if (this.drop === 'People') {
 
           this.searchService.searchPeople().subscribe(val => {
             this.peopleRes = val;
           }, err => {
-            this.errorEvent.emit('Error while searching people ');
+            this.errorEvent.emit({msg: 'Error while searching people '});
           });
         } else if (this.drop === 'Playlists') {
 
           this.searchService.searchPlaylists().subscribe(val => {
             this.playlistsRes = val;
           }, err => {
-            this.errorEvent.emit('Error while searching playlist');
+            this.errorEvent.emit({msg: 'Error while searching playlist'});
           });
         } else if (this.drop === 'Events') {
 
           this.searchService.searchEvents().subscribe(val => {
             this.eventsRes = val;
           }, err => {
-            this.errorEvent.emit('Error while searching events');
+            this.errorEvent.emit({msg: 'Error while searching events'});
           });
         }
       }

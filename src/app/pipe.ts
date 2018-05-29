@@ -9,7 +9,7 @@ export class SanitizeHtml implements PipeTransform  {
   ) {};
 
   transform(value) {
-    return this.sanitizer.bypassSecurityTrustHtml(value);
+    return this.sanitizer.bypassSecurityTrustStyle(value);
   }
 }
 

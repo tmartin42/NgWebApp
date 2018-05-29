@@ -101,6 +101,7 @@
   background: #fd4343;
   padding: 20px 30px;
   /* font-size: 18px; */
+  z-index: 5;
   width: 470px;
   text-align: left;
   display: block;
@@ -135,6 +136,14 @@
   width: calc(100% - 30px);
   font-size: 18px;
   color: white;
+}
+
+.error.notError {
+  background: #adff6f;
+}
+
+.error.notError .errorMsg {
+  color: black;
 }
 
 .close {

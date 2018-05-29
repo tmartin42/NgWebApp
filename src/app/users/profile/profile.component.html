@@ -1,25 +1,48 @@
 
-<h1>Edit Profile</h1>
 
 <div class="img">
-  <img *ngIf="me && me.pic" [src]="me.pic"/>
-  <input [(ngModel)]="img" type="file" (change)="imgChange($event)"/>
+  <div *ngIf="picURL" class="preview" [ngStyle]="{'background-image': picURL}"></div>
+  <div class="overlay">change picture</div>
+  <input [(ngModel)]="img" type="text" (change)="imgChange($event)"/>
 </div>
+
+<h1 *ngIf="me && me.username">{{ me.username }}</h1>
+
 <div class="inputwrap">
-  <label> Change username:
-    <input [(ngModel)]="username" placeholder="Change username">
-    <button (click)="confirmChangesUsername()">
-      Confirm
-    </button>
+  <label> Change password
   </label>
-  <label> Change password:
     <input type="password" [(ngModel)]="oldpassword" placeholder="Old password">
-    <input type="password" [(ngModel)]="password" placeholder="Confirm password">
-    <input type="password" [(ngModel)]="passwordconf" placeholder="Confirm password">
+    <input type="password" [(ngModel)]="newpassword" placeholder="New password">
+    <input type="password" [(ngModel)]="confirmpassword" placeholder="Confirm password">
     <button (click)="confirmChangesPass()">
       Confirm
     </button>
-  </label>
   <a (click)="delete()"></a>
-
 </div>
+
+
+<div class="inputwrap deezer">
+  <label> Link with
+  </label>
+  <img src="/assets/img/deezerLogo.png">
+</div>
+
+
+<div class="inputwrap">
+  <label> Change username
+  </label>
+    <input [(ngModel)]="newusername" placeholder="Change username">
+    <button (click)="confirmChangesUsername()">
+      Confirm
+    </button>
+</div>
+
+<div class="inputwrap">
+  <label> Delete account
+  </label>
+    <input [(ngModel)]="confirmdelete" placeholder='write "delete it please" to confirm'>
+    <button (click)="confirmDeleteAccount()">
+      Confirm
+    </button>
+</div>
+

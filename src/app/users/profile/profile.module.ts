@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
+import {SanitizeHtml} from "../../pipe";
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { ProfileComponent } from './profile.component';
   providers: [
     UsersService
   ],
-  declarations: [ProfileComponent]
+  declarations: [ProfileComponent, SanitizeHtml]
 })
 export class ProfileModule { }

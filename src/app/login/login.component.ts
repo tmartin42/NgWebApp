@@ -36,23 +36,23 @@ export class LoginComponent {
           str = JSON.parse(err.error);
         }
         if (err.error && str && str.result) {
-          this.errorEvent.emit(str.result);
+          this.errorEvent.emit({msg: str.result});
         } else {
-          this.errorEvent.emit('Unknown error in login');
+          this.errorEvent.emit({msg: 'Unknown error in login'});
         }
       });
   }
   public register(username, email, password, passwordConfirm) {
     if (password !== passwordConfirm) {
-      this.errorEvent.emit('password must be the same as confirmation');
+      this.errorEvent.emit({msg: 'password must be the same as confirmation'});
     } else if (username === '' || email === '' || password === '') {
       return;
     } else if (username.length < 3) {
-      this.errorEvent.emit('username is too short');
+      this.errorEvent.emit({msg: 'username is too short'});
     } else if (password.length < 8 || /.*\d+.*/.test(password) === false) {
-      this.errorEvent.emit('password must be at least 8 characters long and have a number.');
+      this.errorEvent.emit({msg: 'password must be at least 8 characters long and have a number.'});
     } else if (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) === false) {
-      this.errorEvent.emit('email must be valid.');
+      this.errorEvent.emit({msg: 'email must be valid.'});
     } else {
       this.authService
         .signup(username, email, password)
@@ -63,9 +63,9 @@ export class LoginComponent {
               str = JSON.parse(err.error);
             }
             if (err.error && str && str.result) {
-              this.errorEvent.emit(str.result);
+              this.errorEvent.emit({msg: str.result});
             } else {
-              this.errorEvent.emit('Unknown error in signin');
+              this.errorEvent.emit({msg: 'Unknown error in signin'});
             }
           });
     }

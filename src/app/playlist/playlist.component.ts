@@ -25,7 +25,7 @@ export class PlaylistComponent implements OnInit {
   @Output() changeListen = new EventEmitter<string>();
   @Output() listenPlaylist = new EventEmitter<any>();
   @Output() colorEvent = new EventEmitter<number>();
-  @Output() errorEvent = new EventEmitter<string>();
+  @Output() errorEvent = new EventEmitter<any>();
 
   tab = 1;
 
@@ -55,7 +55,7 @@ export class PlaylistComponent implements OnInit {
       this.playlist.tracks.push(e.id);
       console.log("tracks ???? ", this.playlist.tracks);
     }, err => {
-      this.errorEvent.emit('Error while adding a track');
+      this.errorEvent.emit({msg: 'Error while adding a track'});
     });
   }
 
@@ -63,7 +63,7 @@ export class PlaylistComponent implements OnInit {
     this.playlistService.addContributor(this.playlist.id, e.id).subscribe(val => {
       this.contributors.push(e);
     }, err => {
-      this.errorEvent.emit('Error while adding a contributor');
+      this.errorEvent.emit({msg: 'Error while adding a contributor'});
     });
   }
 
@@ -76,7 +76,7 @@ export class PlaylistComponent implements OnInit {
         }
       });
     }, err => {
-      this.errorEvent.emit('Error while removing a contributor');
+      this.errorEvent.emit({msg: 'Error while removing a contributor'});
     });
   }
 
@@ -90,7 +90,7 @@ export class PlaylistComponent implements OnInit {
         }
       });
     }, err => {
-      this.errorEvent.emit('Error while deleting a track from the playlist');
+      this.errorEvent.emit({msg: 'Error while deleting a track from the playlist'} );
     });
   }
 
@@ -109,7 +109,7 @@ export class PlaylistComponent implements OnInit {
         this.tracks[id] = tmp2;
         this.tracks[id + 1] = tmp;
       }, err => {
-        this.errorEvent.emit('Error while moving this track down');
+        this.errorEvent.emit({msg: 'Error while moving this track down'});
       });
     }
   }
@@ -123,7 +123,7 @@ export class PlaylistComponent implements OnInit {
         this.tracks[id] = tmp2;
         this.tracks[id - 1] = tmp;
       }, err => {
-        this.errorEvent.emit('Error while moving this track up');
+        this.errorEvent.emit({msg: 'Error while moving this track up'});
       });
     }
   }

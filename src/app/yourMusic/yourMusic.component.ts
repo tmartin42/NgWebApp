@@ -16,7 +16,7 @@ import {UsersService} from "../users/users.service";
 export class YourMusicComponent implements OnInit {
 
 
-  @Output() errorEvent = new EventEmitter<string>();
+  @Output() errorEvent = new EventEmitter<any>();
   @Output() colorEvent = new EventEmitter<number>();
   playlists: any;
   friends: any[] = [];
@@ -41,12 +41,12 @@ export class YourMusicComponent implements OnInit {
     this.yourMusicService.getPlaylists().subscribe(val => {
       this.playlists = val;
     }, err => {
-      this.errorEvent.emit('Unknown error while loading playlists');
+      this.errorEvent.emit({msg: 'Unknown error while loading playlists'});
     });
     this.yourMusicService.getFriends().subscribe(val => {
       this.friends = val;
       }, err => {
-        this.errorEvent.emit('Unknown error while loading friends');
+        this.errorEvent.emit({msg: 'Unknown error while loading friends'});
       });
   }
 
@@ -63,9 +63,9 @@ export class YourMusicComponent implements OnInit {
         this.playlists.push(val);
         }, err => {
         if (err.error && err.error.result) {
-          this.errorEvent.emit(err.error.result);
+          this.errorEvent.emit({msg: err.error.result});
         } else {
-          this.errorEvent.emit("Unknown error when creating playlist");
+          this.errorEvent.emit({msg: "Unknown error when creating playlist"});
         }
       });
     } else if (this.modalType === 'event') {
@@ -74,9 +74,9 @@ export class YourMusicComponent implements OnInit {
       }, err => {
         console.log(err);
         if (err.error && err.error.result) {
-          this.errorEvent.emit(err.error.result);
+          this.errorEvent.emit({msg: err.error.result});
         } else {
-          this.errorEvent.emit("Unknown error when creating event");
+          this.errorEvent.emit({msg: "Unknown error when creating event"});
         }
     });
     }
@@ -92,7 +92,7 @@ export class YourMusicComponent implements OnInit {
         }
       });
     }, error => {
-      this.errorEvent.emit(`Unknow error while removing friend`);
+      this.errorEvent.emit({msg: `Unknow error while removing friend`});
       });
   }
 
