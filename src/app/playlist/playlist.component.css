@@ -363,3 +363,43 @@ button {
   color: white;
   cursor: pointer;
 }
+
+.inputwrap.radiocont {
+  width: 250px;
+}
+
+.radio .switch {
+  height: 40px;
+  background: white;
+  width: 70px;
+  border-radius: 35px;
+  position: relative;
+  display: inline-block;
+}
+
+.radio .switch:after {
+  content: '';
+  background: #fd4343;
+  position: absolute;
+  left: 32px;
+  top: 2px;
+  height: 36px;
+  width: 36px;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+}
+
+.radio .switch.left:after {
+  left: 2px;
+  background: #68ad35;
+
+}
+
+.radioDesc {
+  font-size: 20px;
+  color: white;
+  display: inline-block;
+  line-height: 40px;
+  vertical-align: top;
+  margin-left: 15px;
+}

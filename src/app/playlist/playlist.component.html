@@ -78,7 +78,7 @@
 
     <div class="inputwrap" *ngIf="playlist">
       <div class="radio">
-        <div class="switch" ngClass="{'left': playlist.isPublic}">
+        <div class="switch" [ngClass]="{'left': playlist.isPublic}">
         </div>
         <div class="radioDesc" *ngIf="playlist.isPublic">public</div>
         <div class="radioDesc" *ngIf="!playlist.isPublic">private</div>
