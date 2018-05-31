@@ -30,4 +30,16 @@ export class PlaylistService {
   moveTrack(playid, tid, id) {
     return this.http.request('post', `http://localhost:3000/playlists/${playid}/moveTrack`, {body: {trackID: tid, newPos: id}});
   }
+
+  changeTitle(playid, newTitle) {
+    return this.http.patch(`http://localhost:3000/playlists/changeTitle/${playid}`, {title: newTitle});
+  }
+
+  deletePlaylist(playid) {
+    return this.http.delete(`http://localhost:3000/playlists/${playid}`, {});
+  }
+
+  togglePublic(playid, isPublic) {
+    return this.http.patch(`http://localhost:3000/playlists/isPublic/${playid}`, {isPublic: isPublic});
+  }
 }

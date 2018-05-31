@@ -375,6 +375,7 @@ button {
   border-radius: 35px;
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .radio .switch:after {
@@ -402,4 +403,5 @@ button {
   line-height: 40px;
   vertical-align: top;
   margin-left: 15px;
+  width: 75px;
 }

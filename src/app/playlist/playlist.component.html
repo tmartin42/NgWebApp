@@ -57,31 +57,32 @@
     <app-search [cust]="custDrop" [isSubpar]="true" (addContributor)="addContributor($event)"  (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
   </div>
   <div class="tab" [ngClass]="{'active': tab == 5}">
+    <div class="smallify">
+      <div class="inputwrap">
+        <label> Change playlist title
+        </label>
+        <input [(ngModel)]="newTitle" placeholder="Change title">
+        <button (click)="confirmChangeTitle()">
+          Confirm
+        </button>
+      </div>
 
-    <div class="inputwrap">
-      <label> Change playlist title
-      </label>
-      <input [(ngModel)]="newtitle" placeholder="Change title">
-      <button (click)="confirmChangeTitle()">
-        Confirm
-      </button>
-    </div>
+      <div class="inputwrap">
+        <label> Delete playlist
+        </label>
+        <input [(ngModel)]="confirmdelete" placeholder='write "delete it please" to confirm'>
+        <button (click)="confirmdeleteplaylist()">
+          Confirm
+        </button>
+      </div>
 
-    <div class="inputwrap">
-      <label> Delete playlist
-      </label>
-      <input [(ngModel)]="confirmdelete" placeholder='write "delete it please" to confirm'>
-      <button (click)="confirmdeleteplaylist()">
-        Confirm
-      </button>
-    </div>
-
-    <div class="inputwrap" *ngIf="playlist">
-      <div class="radio">
-        <div class="switch" [ngClass]="{'left': playlist.isPublic}">
+      <div class="inputwrap" *ngIf="playlist">
+        <div class="radio" >
+          <div class="switch" [ngClass]="{'left': playlist.isPublic}" (click)="changePublic()">
+          </div>
+          <div class="radioDesc" *ngIf="playlist.isPublic">public</div>
+          <div class="radioDesc" *ngIf="!playlist.isPublic">private</div>
         </div>
-        <div class="radioDesc" *ngIf="playlist.isPublic">public</div>
-        <div class="radioDesc" *ngIf="!playlist.isPublic">private</div>
       </div>
     </div>
   </div>

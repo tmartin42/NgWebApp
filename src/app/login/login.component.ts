@@ -30,7 +30,9 @@ export class LoginComponent {
     }
     this.authService
       .login(username, password)
-      .subscribe(() => this.router.navigateByUrl('/'), err => {
+      .subscribe(() => this.router.navigateByUrl('/').then(val => {
+        this.errorEvent.emit({msg: 'Logged in successfully', notError: true});
+      }), err => {
         let str;
         if (err.error) {
           str = JSON.parse(err.error);
@@ -56,7 +58,9 @@ export class LoginComponent {
     } else {
       this.authService
         .signup(username, email, password)
-        .subscribe(() => this.router.navigateByUrl('/'),
+        .subscribe(() => this.router.navigateByUrl('/').then(val => {
+            this.errorEvent.emit({msg: 'Registered successfully', notError: true});
+          }),
           err => {
             let str;
             if (err.error) {

@@ -175,6 +175,7 @@ export class AppComponent implements OnInit {
   }
 
   onActivate(e) {
+    this.color = 1;
     if (this.errorService.errors.length > 0 ) {
       this.errorService.errors = [];
     }

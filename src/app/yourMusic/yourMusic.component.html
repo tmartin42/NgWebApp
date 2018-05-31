@@ -230,7 +230,7 @@
     <div class="someplaylists line" *ngIf="playlists.length">
       <h2>Your Playlists</h2>
       <div class="somePlaylistsList list">
-          <a class="event square" *ngFor="let playlist of playlists " href="/playlist/{{playlist.id}}">
+          <a class="event square" *ngFor="let playlist of playlists " routerLink="/playlist/{{playlist.id}}">
             <div class="img">
               <div class="subtitle">
             {{ playlist.title }}

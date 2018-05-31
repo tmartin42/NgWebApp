@@ -16,7 +16,7 @@
 <div class="searchResult" [ngClass]="{'sub': isSubpar === true}">
   <div class="someevents line" *ngIf="eventsRes.length">
     <div class="someEventsList smallList">
-      <a class="event square" *ngFor="let event of eventsRes | filterEvents: filterstr" href="/playlist/{{event.id}}">
+      <a class="event square" *ngFor="let event of eventsRes | filterEvents: filterstr" routerLink="/playlist/{{event.id}}">
         <div class="img">
           <div class="subtitle">
             {{ event.title }}
@@ -27,7 +27,7 @@
   </div>
   <div class="someplaylists line" *ngIf="playlistsRes.length">
     <div class="somePlaylistsList smallList">
-      <a class="event square" *ngFor="let playlist of playlistsRes | filterPlaylist: filterstr" href="/playlist/{{playlist.id}}">
+      <a class="event square" *ngFor="let playlist of playlistsRes | filterPlaylist: filterstr" routerLink="/playlist/{{playlist.id}}">
         <div class="img">
           <div class="subtitle">
             {{ playlist.title }}

@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
         this.usersService.addImgAPI(val).subscribe(res => {
           console.log(res);
           this.picURL = `url('${val}')`;
+          this.errorEvent.emit({msg: `Updated picture`, notError: true});
         });
       });
     } else if (e.target.value) {
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit {
         console.log(res);
 
         this.picURL = `url('${e.target.value}')`;
+        this.errorEvent.emit({msg: `Updated picture`, notError: true});
       });
     }
   }

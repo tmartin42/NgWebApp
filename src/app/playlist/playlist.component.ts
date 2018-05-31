@@ -38,6 +38,8 @@ export class PlaylistComponent implements OnInit {
   tracksOK = false;
   moveit = false;
 
+  newTitle = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -53,6 +55,7 @@ export class PlaylistComponent implements OnInit {
     this.playlistService.addTrack(this.playlist.id, e.id).subscribe(val => {
       this.tracks.push(e);
       this.playlist.tracks.push(e.id);
+      this.errorEvent.emit({msg: `Successfully added ${e.title} in tracklist`, notError: true});
       console.log("tracks ???? ", this.playlist.tracks);
     }, err => {
       this.errorEvent.emit({msg: 'Error while adding a track'});
@@ -62,6 +65,7 @@ export class PlaylistComponent implements OnInit {
   public addContributor(e) {
     this.playlistService.addContributor(this.playlist.id, e.id).subscribe(val => {
       this.contributors.push(e);
+      this.errorEvent.emit({msg: `Successfully added ${e.username} as contributor`, notError: true});
     }, err => {
       this.errorEvent.emit({msg: 'Error while adding a contributor'});
     });
@@ -73,6 +77,7 @@ export class PlaylistComponent implements OnInit {
       this.contributors.forEach((key, ids) => {
         if (key.id === id) {
           this.contributors.splice(ids, 1);
+          this.errorEvent.emit({msg: `Contributor successfully removed`, notError: true});
         }
       });
     }, err => {
@@ -87,6 +92,7 @@ export class PlaylistComponent implements OnInit {
         console.log(key.id, id);
         if (key.id === id) {
           this.tracks.splice(ids, 1);
+          this.errorEvent.emit({msg: `Track successfully removed`, notError: true});
         }
       });
     }, err => {
@@ -142,7 +148,36 @@ export class PlaylistComponent implements OnInit {
     setTimeout(() => {this.tab = nbr; }, 200);
   }
 
+  public  confirmChangeTitle() {
 
+    this.playlistService.changeTitle(this.playlist.id, this.newTitle).subscribe(val => {
+      this.playlist.title = this.newTitle;
+      this.errorEvent.emit({msg: 'Title updated', notError: true});
+    }, err => {
+      this.errorEvent.emit({msg: 'Error while changing title'});
+    });
+  }
+
+  public confirmdeleteplaylist() {
+    this.playlistService.deletePlaylist(this.playlist.id).subscribe(val => {
+
+      this.router.navigateByUrl('/').then(() => {this.errorEvent.emit({msg: 'Title updated', notError: true}); });
+    }, err => {
+      this.errorEvent.emit({msg: 'Error while deleting playlist'});
+    });
+  }
+
+  public changePublic() {
+      this.playlistService.togglePublic(this.playlist.id, !this.playlist.isPublic).subscribe(val => {
+        if (this.playlist.isPublic)
+          this.errorEvent.emit({msg: 'Playlist is now private', notError: true});
+        else
+          this.errorEvent.emit({msg: 'Playlist is now public', notError: true});
+        this.playlist.isPublic = !this.playlist.isPublic;
+      }, err => {
+        this.errorEvent.emit({msg: 'Error updating the privacy of playlist'});
+      });
+  }
 
   private getPlaylist() {
     this.playlistService.getPlaylist(this.route.snapshot.paramMap.get('id')).subscribe(val => {

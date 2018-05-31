@@ -61,6 +61,7 @@ export class YourMusicComponent implements OnInit {
     if (this.modalType === 'playlist') {
       this.yourMusicService.newPlaylist(this.modalInput).subscribe(val => {
         this.playlists.push(val);
+        this.errorEvent.emit({msg: `Successfully created new playlist !`, notError: true});
         }, err => {
         if (err.error && err.error.result) {
           this.errorEvent.emit({msg: err.error.result});
@@ -71,6 +72,7 @@ export class YourMusicComponent implements OnInit {
     } else if (this.modalType === 'event') {
       this.yourMusicService.newEvent(this.modalInput).subscribe(val => {
         console.log(val);
+        this.errorEvent.emit({msg: `Successfully created new event !`, notError: true});
       }, err => {
         console.log(err);
         if (err.error && err.error.result) {
@@ -89,6 +91,7 @@ export class YourMusicComponent implements OnInit {
       this.friends.forEach((key, ids) => {
         if (key.id === id) {
           this.friends.splice(ids, 1);
+          this.errorEvent.emit({msg: `Successfully removed friend`, notError: true});
         }
       });
     }, error => {
@@ -125,6 +128,7 @@ export class YourMusicComponent implements OnInit {
   ngOnInit() {
     console.log('lol');
     this.loadData();
+    this.colorEvent.emit(1);
   }
 
 }

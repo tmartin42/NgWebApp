@@ -54,3 +54,8 @@ h4 {
   color: white;
   margin-top: 90px;
 }
+
+.smallify {
+  max-width: 1500px;
+  display: inline-block;
+}
