@@ -44,6 +44,7 @@ export class LoginComponent {
         }
       });
   }
+
   public register(username, email, password, passwordConfirm) {
     if (password !== passwordConfirm) {
       this.errorEvent.emit({msg: 'password must be the same as confirmation'});

@@ -1,9 +1,4 @@
 
-
-.Heiti_TC {
-
-}
-
 h1 {
   font-size: 50px;
   position: relative;
@@ -34,7 +29,6 @@ h1 span {
   display: inline-block;
   color: #112329;
   cursor: pointer;
-
 }
 
 .doubletab {

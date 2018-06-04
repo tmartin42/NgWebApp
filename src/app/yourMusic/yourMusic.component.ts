@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import {  AuthenticationService } from '../authentication/authentication.service';
 import { YourMusicService } from './yourMusic.service';
 import {UsersService} from "../users/users.service";
+import {PlaylistService} from "../playlist/playlist.service";
 
 @Component({
   selector: 'app-yourMusic',
@@ -19,7 +20,7 @@ export class YourMusicComponent implements OnInit {
   @Output() errorEvent = new EventEmitter<any>();
   @Output() colorEvent = new EventEmitter<number>();
   playlists: any;
-  friends: any[] = [];
+  friends: any;
   tab = 1;
   activateModal = false;
   modalTitle = '';
@@ -32,13 +33,14 @@ export class YourMusicComponent implements OnInit {
     private router: Router,
     private yourMusicService: YourMusicService,
     private authService: AuthenticationService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private playlistService: PlaylistService
   ) {
   }
 
   public loadData() {
 
-    this.yourMusicService.getPlaylists().subscribe(val => {
+    this.playlistService.getPlaylists().subscribe(val => {
       this.playlists = val;
     }, err => {
       this.errorEvent.emit({msg: 'Unknown error while loading playlists'});
@@ -126,7 +128,6 @@ export class YourMusicComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('lol');
     this.loadData();
     this.colorEvent.emit(1);
   }

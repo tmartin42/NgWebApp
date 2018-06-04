@@ -315,134 +315,13 @@
     <div class="someplaylists line">
       <h2>Playlists you might like</h2>
       <div class="somePlaylistsList list">
-          <a class="event square" *ngFor="let user of users$ | async" routerLink="/playlist/{{user.id}}">
+          <a class="event square" *ngFor="let playlist of playlists" routerLink="/playlist/{{playlist.id}}">
             <div class="img">
               <div class="subtitle">
-            {{ user.title }}
+            {{ playlist.title }}
               </div>
             </div>
           </a>
-
-        <!--a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a>
-        <a class="event square">
-          <div class="img">
-            <div class="subtitle">example playlist</div>
-          </div>
-        </a-->
       </div>
     </div>
   </div>

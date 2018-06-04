@@ -1,8 +1,8 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 
-import {  AuthenticationService } from '../../authentication/authentication.service';
-import {  UsersService } from '../users.service';
+import {  AuthenticationService } from '../authentication/authentication.service';
+import {  UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +16,6 @@ export class ProfileComponent implements OnInit {
   tab = 1;
   size = '15px';
   picURL;
-
   oldpassword = '';
   newpassword = '';
   confirmpassword = '';
@@ -57,7 +56,7 @@ export class ProfileComponent implements OnInit {
         if (this.newpassword === this.confirmpassword) {
           this.usersService.changePassword(this.oldpassword, this.newpassword).subscribe(val => {
             console.log(val);
-            this.errorEvent.emit({msg:'Password changed !', notError: true});
+            this.errorEvent.emit({msg: 'Password changed !', notError: true});
           }, err => {
             console.log(err);
             if (err.message)
@@ -69,7 +68,7 @@ export class ProfileComponent implements OnInit {
           this.errorEvent.emit({msg: 'new and confirm password must be the same'});
         }
     } else {
-      this.errorEvent.emit({msg:'Empty input'});
+      this.errorEvent.emit({msg: 'Empty input'});
     }
   }
 
@@ -87,7 +86,7 @@ export class ProfileComponent implements OnInit {
     } else {
       this.errorEvent.emit({msg:'Empty input'});
     }*/
-    this.errorEvent.emit({msg:'Sorry you can\'t change your username for now.'});
+    this.errorEvent.emit({msg: 'Sorry you can\'t change your username for now.'});
   }
 
   confirmDeleteAccount() {/*

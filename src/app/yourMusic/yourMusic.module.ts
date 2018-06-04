@@ -7,7 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { YourMusicRoutingModule } from './yourMusic-routing.module';
 import { YourMusicComponent } from './yourMusic.component';
 import {  YourMusicService } from './yourMusic.service';
-import { UsersService } from "../users/users.service";
+import { UsersService } from '../users/users.service';
+import {PlaylistService} from "../playlist/playlist.service";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { UsersService } from "../users/users.service";
   ],
   providers: [
     YourMusicService,
-    UsersService
+    UsersService,
+    PlaylistService
   ],
   declarations: [YourMusicComponent]
 })

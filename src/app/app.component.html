@@ -4,7 +4,7 @@
   <div class="leftSep"></div>
   <a class="leftLink" routerLink="/yourMusic">Your music</a>
 
-  <a class="leftLink" routerLink="/discover">Discover</a>
+  <!--a class="leftLink" routerLink="/discover">Discover</a-->
   <div class="leftSep"></div>
   <a class="leftLink currPlaylist" *ngIf="playlist" routerLink="/playlist/{{playlist.id}}">Playing playlist<br/><span>{{playlist.title}}</span></a>
 
@@ -27,8 +27,6 @@
 <div class="bottomPlayer" *ngIf="isAuth">
 
   <div id="player"></div>
-  <!--iframe [src]="src" *ngIf="src" class="player"></iframe-->
-  <!--div  [innerHTML]="embed | sanitizeHtml" (DOMSubtreeModified)="test($event)"></div-->
 </div>
 
 

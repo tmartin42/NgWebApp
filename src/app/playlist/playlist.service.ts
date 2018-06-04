@@ -6,9 +6,13 @@ import { Observable } from 'rxjs';
 export class PlaylistService {
 
   constructor(private http: HttpClient) {}
+  
+  getPlaylists() {
+    return this.http.get('http://localhost:3000/playlists/me');
+  }
 
   getPlaylist(id): Observable<any> {
-    return this.http.get('http://localhost:3000/playlists/' + id);
+    return this.http.get(`http://localhost:3000/playlists/${id}`);
   }
 
   addTrack(playid, trackid) {

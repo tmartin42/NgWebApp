@@ -51,10 +51,8 @@ h2 {
   position: relative;
   display: block;
   font-size: 20px;
-  /* height: 80px; */
   color: white;
   vertical-align: bottom;
-  /* line-height: 80px; */
   padding: 25px 0px 10px;
 }
 
@@ -78,7 +76,6 @@ h2 {
 .song:hover {
   background: #0000001f;
 }
-
 
 .song.moving * {
   z-index: 11;
@@ -129,7 +126,6 @@ h2 {
   width: calc(100% - 190px);
 }
 
-
 .removeSong {
   height: 50px;
   width: 50px;
@@ -141,7 +137,6 @@ h2 {
   vertical-align: top;
   color: #131a1f;
   border: 1px solid #b3b3b3;
-  /* margin: 5px; */
   background: #b3b3b3;
   cursor: pointer;
 }
@@ -156,8 +151,6 @@ h2 {
   text-align: center;
   vertical-align: top;
   color: #131a1f;
-  /* border: 1px solid #b3b3b3; */
-  /* background: #b3b3b3; */
   cursor: pointer;
   color: #b3b3b3;
   padding-top: 7px;
@@ -195,7 +188,6 @@ h2 {
 
 .imgp {
   height: 200px;
-  /* background: #5d1224; */
   width: 200px;
   margin: 10px 0px;
   background: linear-gradient(45deg, #382126 0%,#0c2328 100%);
@@ -218,9 +210,6 @@ h2 {
 }
 
 .smallList span {
-
-
-
   padding: 10px;
   height: 70px;
   display: inline-block;
@@ -237,7 +226,6 @@ h2 {
 
 .img {
   height: 200px;
-  /* background: #5d1224; */
   width: 200px;
   background: linear-gradient(45deg, #382126 0%,#0c2328 100%);
   background-position: 50%;
@@ -266,7 +254,6 @@ h2 {
   position: absolute;
   color: white;
   font-size: 105px;
-  /* z-index: 6; */
   line-height: 210px;
   opacity: 0;
   transition: 0.2s;
@@ -301,8 +288,21 @@ h2 {
   content: '>';
   height: 50px;
   width: 50px;
-  line-height: 52px;
+  line-height: 54px;
   font-size: 35px;
+  transition: 0.1s ease;
+}
+
+.song.playing:hover .nbr:after {
+  color: black;
+  height: 50px;
+  width: 50px;
+  line-height: 52px;
+  font-size: 20px;
+}
+
+.song.playing:hover .nbr {
+  border: 1px solid black;
 }
 
 .song.playing .removeSong {

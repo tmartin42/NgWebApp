@@ -4,10 +4,8 @@ h2 {
   position: relative;
   display: block;
   font-size: 20px;
-  /* height: 80px; */
   color: white;
   vertical-align: bottom;
-  /* line-height: 80px; */
   padding: 0px 0px 20px;
 }
 
@@ -32,7 +30,6 @@ h2 {
 
 .img {
   height: 200px;
-  /* background: #5d1224; */
   width: 200px;
   margin: 10px 0px;
   background: linear-gradient(45deg, #382126 0%,#0c2328 100%);

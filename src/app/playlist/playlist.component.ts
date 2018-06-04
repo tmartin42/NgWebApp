@@ -33,22 +33,17 @@ export class PlaylistComponent implements OnInit {
 
   playlist: Playlist;
   owner: User;
-  contributors: any[] = [];
-  tracks: any[] = [];
-  tracksOK = false;
-  moveit = false;
-
+  contributors: any;
+  tracks: any = [];
   newTitle = '';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthenticationService,
     private playlistService: PlaylistService,
     private usersService: UsersService,
     private dataService: DataService
   ) { }
-
 
 
   public addTrack(e) {
@@ -56,7 +51,6 @@ export class PlaylistComponent implements OnInit {
       this.tracks.push(e);
       this.playlist.tracks.push(e.id);
       this.errorEvent.emit({msg: `Successfully added ${e.title} in tracklist`, notError: true});
-      console.log("tracks ???? ", this.playlist.tracks);
     }, err => {
       this.errorEvent.emit({msg: 'Error while adding a track'});
     });
@@ -136,11 +130,6 @@ export class PlaylistComponent implements OnInit {
 
   public subchangeListen(e) {
     this.changeListen.emit(e);
-    console.log("subchange", e);
-  }
-
-  public onActivate(e) {
-    console.log("onActivate", e);
   }
 
   public selectTab(nbr) {
@@ -149,7 +138,6 @@ export class PlaylistComponent implements OnInit {
   }
 
   public  confirmChangeTitle() {
-
     this.playlistService.changeTitle(this.playlist.id, this.newTitle).subscribe(val => {
       this.playlist.title = this.newTitle;
       this.errorEvent.emit({msg: 'Title updated', notError: true});
@@ -160,7 +148,6 @@ export class PlaylistComponent implements OnInit {
 
   public confirmdeleteplaylist() {
     this.playlistService.deletePlaylist(this.playlist.id).subscribe(val => {
-
       this.router.navigateByUrl('/').then(() => {this.errorEvent.emit({msg: 'Title updated', notError: true}); });
     }, err => {
       this.errorEvent.emit({msg: 'Error while deleting playlist'});
@@ -169,10 +156,11 @@ export class PlaylistComponent implements OnInit {
 
   public changePublic() {
       this.playlistService.togglePublic(this.playlist.id, !this.playlist.isPublic).subscribe(val => {
-        if (this.playlist.isPublic)
+        if (this.playlist.isPublic) {
           this.errorEvent.emit({msg: 'Playlist is now private', notError: true});
-        else
+        } else {
           this.errorEvent.emit({msg: 'Playlist is now public', notError: true});
+        }
         this.playlist.isPublic = !this.playlist.isPublic;
       }, err => {
         this.errorEvent.emit({msg: 'Error updating the privacy of playlist'});
@@ -191,7 +179,11 @@ export class PlaylistComponent implements OnInit {
         this.usersService.getUser(key).subscribe(vel => this.contributors[id] = vel);
       });
 
-      this.usersService.getUser(val.creator).subscribe(owner => this.owner = owner);
+      this.usersService.getUser(val.creator).subscribe(owner => this.owner = owner, err => {
+        this.errorEvent.emit({msg: 'Error while getting owner'});
+      });
+    }, err => {
+      this.errorEvent.emit({msg: 'Error while getting playlists'});
     });
   }
 
@@ -199,6 +191,6 @@ export class PlaylistComponent implements OnInit {
     this.getPlaylist();
     setTimeout(() => {
       this.colorEvent.emit(2);
-      },100);
+      }, 100);
   }
 }

@@ -51,10 +51,10 @@
     </div>
   </div>
   <div class="tab" [ngClass]="{'active': tab == 3}" >
-    <app-search [isSubpar]="true" (addedTrack)="addTrack($event)" (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
+    <app-search [isSubpar]="true" (addedTrack)="addTrack($event)" (changeListen)="subchangeListen($event)"></app-search>
   </div>
   <div class="tab" [ngClass]="{'active': tab == 4}">
-    <app-search [cust]="custDrop" [isSubpar]="true" (addContributor)="addContributor($event)"  (changeListen)="subchangeListen($event)" (activate)='onActivate($event)'></app-search>
+    <app-search [cust]="custDrop" [isSubpar]="true" (addContributor)="addContributor($event)"  (changeListen)="subchangeListen($event)"></app-search>
   </div>
   <div class="tab" [ngClass]="{'active': tab == 5}">
     <div class="smallify">

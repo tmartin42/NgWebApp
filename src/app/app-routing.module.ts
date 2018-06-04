@@ -26,7 +26,7 @@ const routes: Routes = [
   {
     path: 'profile',
     canActivate: [ ProtectedGuard ],
-    loadChildren: './users/profile/profile.module#ProfileModule'
+    loadChildren: './profile/profile.module#ProfileModule'
   },
   {
     path: 'search',
@@ -35,12 +35,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'discover',
+    redirectTo: 'yourMusic',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'discover',
+    redirectTo: 'yourMusic',
     pathMatch: 'full'
   }
 ];

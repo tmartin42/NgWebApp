@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import {  AuthenticationService } from '../authentication/authentication.service';
 import { DataService } from '../data.service';
+import {PlaylistService} from '../playlist/playlist.service';
 
 @Component({
   selector: 'app-discover',
@@ -14,21 +15,20 @@ import { DataService } from '../data.service';
 
 export class DiscoverComponent implements OnInit {
 
-  public users$: Observable<any>;
-  public data$: Observable<any>;
+  public playlists: any;
 
   tab = 1;
 
   constructor(
     private router: Router,
     private dataService: DataService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private playlistService: PlaylistService
   ) {
-    console.log(this.users$);
   }
 
   public loadData() {
-    this.users$ = this.dataService.getUsers();
+    this.playlistService.getPlaylists().subscribe(val => {this.playlists = val; });
   }
 
 
@@ -38,7 +38,6 @@ export class DiscoverComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('lol');
     this.loadData();
   }
 

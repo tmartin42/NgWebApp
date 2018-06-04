@@ -5,6 +5,7 @@ import { DataService } from '../data.service';
 
 import { DiscoverRoutingModule } from './discover-routing.module';
 import { DiscoverComponent } from './discover.component';
+import {PlaylistService} from '../playlist/playlist.service';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { DiscoverComponent } from './discover.component';
     DiscoverRoutingModule
   ],
   providers: [
-    DataService
+    DataService,
+    PlaylistService
   ],
   declarations: [DiscoverComponent]
 })

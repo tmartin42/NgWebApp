@@ -103,3 +103,8 @@ button {
   color: white;
   cursor: pointer;
 }
+
+.smallify {
+  max-width: 1500px;
+  display: inline-block;
+}
